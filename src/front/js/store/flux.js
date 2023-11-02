@@ -23,35 +23,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			testFunc: () => { return "RESULT"},
-
-			login: async (email, password) => {
-				const store = getStore();
-				let successCheck = false
-				fetch( store.backend_url + "api/token", {
-					method: "POST",
-					headers: {"Content-Type": "application/json"},
-					body: JSON.stringify({email: email, password: password}),
-				}).then((recieved) => {
-					if (recieved.ok) {
-						successCheck = true
-					} else {
-						successCheck = false
-					}
-					return recieved.json()
-				})
-				.then((data) => {
-					if (successCheck) {
-						store.token = data["access_token"]
-						window.open(
-							"demo", "_self"  // TODO - set "demo" as home screen
-						  );
-					} else {
-						return(data["message"])
-					}
-				}).catch((error) => console.log(error))
-			},
-
 			getMessage: async () => {
 				try{
 					// fetching data from the backend
