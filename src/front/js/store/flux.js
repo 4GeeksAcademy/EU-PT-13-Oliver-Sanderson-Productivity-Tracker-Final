@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			backend_url: "https://bug-free-dollop-94rw6v5767gfg64-3001.app.github.dev/",
+			token: "",
 			message: null,
 			demo: [
 				{
@@ -22,24 +23,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			login: (email, password) => {
+			testFunc: () => { return "RESULT"},
+
+			login: async (email, password) => {
 				const store = getStore();
-				console.log("Bacon And Eggs")
+				let successCheck = false
 				fetch( store.backend_url + "api/token", {
 					method: "POST",
 					headers: {"Content-Type": "application/json"},
 					body: JSON.stringify({email: email, password: password}),
 				}).then((recieved) => {
 					if (recieved.ok) {
-						alert("SUCCESS")
+						successCheck = true
 					} else {
-						alert("FAIL")
+						successCheck = false
 					}
 					return recieved.json()
 				})
 				.then((data) => {
-					console.log(data)
-				})
+					if (successCheck) {
+						store.token = data["access_token"]
+						window.open(
+							"demo", "_self"  // TODO - set "demo" as home screen
+						  );
+					} else {
+						return(data["message"])
+					}
+				}).catch((error) => console.log(error))
 			},
 
 			getMessage: async () => {
