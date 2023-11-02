@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			backend_url: "https://bug-free-dollop-94rw6v5767gfg64-3001.app.github.dev/",
 			message: null,
 			demo: [
 				{
@@ -19,6 +20,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+
+			login: (email, password) => {
+				const store = getStore();
+				console.log("Bacon And Eggs")
+				fetch( store.backend_url + "api/token", {
+					method: "POST",
+					headers: {"Content-Type": "application/json"},
+					body: JSON.stringify({email: email, password: password}),
+				}).then((recieved) => {
+					if (recieved.ok) {
+						alert("SUCCESS")
+					} else {
+						alert("FAIL")
+					}
+					return recieved.json()
+				})
+				.then((data) => {
+					console.log(data)
+				})
 			},
 
 			getMessage: async () => {
