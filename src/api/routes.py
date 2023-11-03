@@ -242,6 +242,7 @@ def handle_sessions():
             temp["time_spent"] = (result.time_spent_secs)
             temp["fun_time"] = (result.fun_time_secs)
             temp["work_time"] = (result.work_time_secs)
+            temp["date"] = (result.date)
             response_body.append(temp)
     return jsonify(response_body), 200
 
