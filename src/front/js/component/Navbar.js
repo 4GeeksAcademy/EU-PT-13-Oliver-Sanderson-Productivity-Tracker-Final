@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 
-export const Navbar = () => {
+
+const Navbar = () => {
 	return (
 	  <nav className="navbar navbar-expand-lg navbar-light bg-light">
 		<a className="navbar-brand" href="#">KorYoku</a>
@@ -31,3 +31,4 @@ export const Navbar = () => {
 	  </nav>
 	);
   };
+  export default Navbar;

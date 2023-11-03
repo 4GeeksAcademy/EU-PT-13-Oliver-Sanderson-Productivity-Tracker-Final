@@ -1,0 +1,99 @@
+.description {
+    height: 689px;
+    width: 1440px;
+  }
+  
+  .description .overlap-group {
+    height: 470px;
+    left: 95px;
+    position: relative;
+    top: 95px;
+    width: 1187px;
+  }
+  
+  .description .open-sans-montserrat-instance {
+    gap: 35px 33px !important;
+    height: 329px !important;
+    left: 15px !important;
+    position: absolute !important;
+    top: 67px !important;
+    width: 662px !important;
+  }
+  
+  .description .design-component-instance-node {
+    font-size: 46px !important;
+    font-weight: 700 !important;
+    margin-top: unset !important;
+  }
+  
+  .description .open-sans-montserrat-2 {
+    color: var(--gray-700) !important;
+    font-size: 16px !important;
+  }
+  
+  .description .p {
+    color: var(--themes-text-color);
+    font-family: "Open Sans", Helvetica;
+    font-size: 46px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0.2px;
+    line-height: 64px;
+    position: absolute;
+    top: 29px;
+    width: 560px;
+  }
+  
+  .description .elevated-medium-elevated-button {
+    background-color: var(--light-background-color) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--accentuate-drop-shadow) !important;
+    left: 104px !important;
+    padding: 10px 40px !important;
+    position: absolute !important;
+    top: 358px !important;
+  }
+  
+  .description .elevated-medium-instance {
+    color: var(--text-color) !important;
+  }
+  
+  .description .ellipse {
+    background-color: #d3dee8;
+    border-radius: 235px;
+    height: 470px;
+    left: 678px;
+    position: absolute;
+    top: 0;
+    width: 470px;
+  }
+  
+  .description .rectangle-2 {
+    background-color: var(--light-background-color);
+    border-radius: 8px;
+    box-shadow: var(--accentuate-drop-shadow);
+    height: 194px;
+    left: 678px;
+    position: absolute;
+    top: 217px;
+    width: 470px;
+  }
+  
+  .description .mockup-saas-instance {
+    border-radius: 9.43px !important;
+    box-shadow: var(--accentuate-drop-shadow) !important;
+    height: 374px !important;
+    left: 639px !important;
+    overflow: unset !important;
+    position: absolute !important;
+    top: 35px !important;
+    width: 548px !important;
+  }
+  
+  .description .mockup-saas-2 {
+    height: 369px !important;
+    left: -2px !important;
+    top: 4px !important;
+    width: 552px !important;
+  }
+  
