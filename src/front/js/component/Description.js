@@ -1,7 +1,7 @@
 import React from "react";
-import { ElevatedMedium } from "../../components/ElevatedMedium";
-import { MockupSaas } from "../../components/MockupSaas";
-import { OpenSansMontserrat } from "../../components/OpenSansMontserrat";
+import ElevatedMedium from "./ElevatedMedium";
+import MockupSaas from "./MockupSaas";
+import OpenSansMontserrat from "./OpenSansMontserrat";
 import "../../styles/style.css";
 
 const Description = () => {

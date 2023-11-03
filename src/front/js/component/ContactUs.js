@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ContactUs= () => {
+const ContactUs = () => {
   return (
     <div id="Contact" className="container border-end-0 border-start-0 mx-auto py-5">
       <h1>Contact Us</h1>
