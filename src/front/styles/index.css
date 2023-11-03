@@ -1,3 +1,54 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+
+.loginBase {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #E1E7E0;
+    height: 700px;
+}
+
+.loginBox {
+    color: #435334;
+    border-radius: 15px;
+    padding:30px;
+    padding-right: 100px;
+    padding-left: 100px;
+    width: 700px;
+    background-color: #FFFFFF;
+    filter: drop-shadow(3px 3px 15px #999b98);
+}
+
+.typeBoxLogin {
+    background-color: #E1E7E0;
+    color: #435334;
+    border: none;
+}
+
+.typeBoxLogin::placeholder {
+    color: #B4BBC1;
+}
+
+.typeBoxLogin:focus {
+    background-color: #E1E7E0;
+    color: #435334;
+    
+}
+
+.loginBtn {
+    background-color: #435334;
+    color:#FFFFFF;
+    margin: 10px;
+}
+
+.loginBtn:hover {
+    background-color: #647554;
+    color:#FFFFFF;
+}
+
+.btnBox {
+    display: flex;
+    justify-content: center;
+}
