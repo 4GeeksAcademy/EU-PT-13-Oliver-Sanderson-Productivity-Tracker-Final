@@ -3,6 +3,11 @@
     width: 1440px;
   }
   
+  .description-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adjust the spacing between components as needed */
+  }
   .description .overlap-group {
     height: 470px;
     left: 95px;
