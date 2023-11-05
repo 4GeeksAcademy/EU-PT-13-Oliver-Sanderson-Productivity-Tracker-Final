@@ -14,7 +14,7 @@ import ContactUs from "./component/ContactUs";
 import Dashboard from "./pages/Dashboard";
 import PomodoroTimer from "./component/PomodoroTimer";
 import Weather from "./pages/Weather";
-
+import TodoList from "./component/TodoList";
 
 //create your first component
 const Layout = () => {
@@ -41,6 +41,7 @@ const Layout = () => {
                         <Route element={<ContactUs />} path="/ContactUs" />
                         <Route element={<PomodoroTimer />} path="/PomodoroTimer" />
                         <Route element={<Weather />} path="/Weather" />
+                        <Route element={<TodoList />} path="/Todo_List" />
                         <Route element={<h1>Not found!</h1>} />
 
                     </Routes>
