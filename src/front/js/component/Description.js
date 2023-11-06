@@ -8,7 +8,9 @@ const Description = () => {
   return (
     <div className="description">
       <div className="overlap-group">
-        <p className="p">Enhance Productivity and Achieve Greater Efficiency</p>
+      <div className="heading-container">
+        <h2 className="heading">Enhance Productivity and Acheive greater efficiency</h2>
+        </div>
         <div className="description-content">
           <OpenSansMontserrat
             className="open-sans-montserrat-instance"
@@ -18,7 +20,9 @@ const Description = () => {
             hasStyles={false}
             itSABigWorldOutClassName="design-component-instance-node"
             text=""
-            text1="Stay organized, focused, and achieve more with our powerful productivity web app. Take control of your tasks, conquer your goals. Utilize your time wisely."
+            text1="Stay organized, focused, and achieve more with our powerful productivity web app to monitor your browing time.     
+                 Take control of your tasks, conquer your goals. 
+                 Utilize your time wisely."
           />
           <ElevatedMedium
             className="elevated-medium-elevated-button"
