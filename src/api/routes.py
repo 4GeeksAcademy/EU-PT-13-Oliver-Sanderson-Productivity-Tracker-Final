@@ -83,16 +83,16 @@ def handle_users():
         # Example PUT body:
         # {
         # "id" : 1,
-        # "name" : "newName"
+        # "name" : "newName",
+        # "last_name" : "newLastName",
         # "email" : "newEmail"
         # }
 
         # Check request_body has 'id'
         if ('id' in request_body):
             # Check the user exists
-            check = User.query.filter(User.id == request_body["id"]).first()
-            if check is not None:
-                user_to_edit = User.query.filter(User.id == request_body["id"]).first()
+            user_to_edit  = User.query.filter(User.id == request_body["id"]).first()
+            if user_to_edit  is not None:
                 if ('name' in request_body):
                     user_to_edit.name = request_body['name']
                 if ('last_name' in request_body):
@@ -123,8 +123,8 @@ def handle_users():
         if ('id' in request_body):
 
             # Check the user exists
-            check = User.query.filter(User.id == request_body["id"]).first()
-            if check is not None:
+            user_to_delete  = User.query.filter(User.id == request_body["id"]).first()
+            if user_to_delete is not None:
                 # First delete related sessions
                 Session.query.filter(Session.user_id == request_body["id"]).delete()
                 # Then delete user
@@ -173,13 +173,23 @@ def handle_sessions():
         # Check request_body has 'id'
         if ('id' in request_body):
             # Check the user exists
-            check = Session.query.filter(Session.id == request_body["id"]).first()
-            if check is not None:
-                check.time_spent_secs = request_body['total_time']
-                check.work_time_secs = request_body['work_time']
-                check.fun_time_secs = request_body['fun_time']
+            session_to_edit = Session.query.filter(Session.id == request_body["id"]).first()
+            if session_to_edit is not None:
+                session_to_edit.time_spent_secs = request_body['total_time']
+                session_to_edit.work_time_secs = request_body['work_time']
+                session_to_edit.fun_time_secs = request_body['fun_time']
                 db.session.commit()
-                db.session.close()
+
+                response_body = []
+                temp = {}
+                temp["id"] = (session_to_edit.id)
+                temp["user_id"] = (session_to_edit.user_id)
+                temp["time_spent"] = (session_to_edit.time_spent_secs)
+                temp["fun_time"] = (session_to_edit.fun_time_secs)
+                temp["work_time"] = (session_to_edit.work_time_secs)
+                temp["date"] = (session_to_edit.date)
+                response_body.append(temp)
+                return jsonify(response_body), 200
 
             else:
                 response_body = "Session does not exist"
@@ -191,12 +201,15 @@ def handle_sessions():
 
     if request.method == "DELETE":
         request_body = request.get_json()
-        # Check request_body has 'id'
+        # Check request_body has 'id' or 'user_id' (if provided 'user_id' it will delete all related to user.)
         if ('user_id' in request_body):
             Session.query.filter(Session.user_id == request_body['user_id']).delete()
             db.session.commit()
+        elif ('id' in request_body):
+            Session.query.filter(Session.id == request_body['id']).delete()
+            db.session.commit()
         else:
-            response_body = "Missing body content. Need 'user_id' of the related sessions to delete."
+            response_body = "Missing body content. Need 'user_id' or 'id' of the related session(s) to delete."
             return jsonify(response_body), 400
 
 
