@@ -95,10 +95,14 @@ def handle_users():
                 user_to_edit = User.query.filter(User.id == request_body["id"]).first()
                 if ('name' in request_body):
                     user_to_edit.name = request_body['name']
+                if ('last_name' in request_body):
+                    user_to_edit.last_name = request_body['last_name']
                 if ('email' in request_body):
                     user_to_edit.email = request_body['email']
+                
+                db.session.commit()
+                db.session.close()
 
-                # TODO update the new values to session
             else:
                 response_body = "User does not exist"
                 return jsonify(response_body), 400
@@ -132,7 +136,7 @@ def handle_users():
             else:
                 response_body = "User does not exist"
                 return jsonify(response_body), 401
-
+            
         else: 
             response_body = "Missing body content. Need 'id' of the user to delete."
             return jsonify(response_body), 400
@@ -171,16 +175,12 @@ def handle_sessions():
             # Check the user exists
             check = Session.query.filter(Session.id == request_body["id"]).first()
             if check is not None:
-                session = Session()
-                session_to_edit = Session.query.filter(Session.id == request_body["id"]).first()
-                session_to_edit.total_time = request_body['total_time']
-                session_to_edit.work_time = request_body['work_time']
-                session_to_edit.fun_time = request_body['work_time']
+                check.time_spent_secs = request_body['total_time']
+                check.work_time_secs = request_body['work_time']
+                check.fun_time_secs = request_body['fun_time']
+                db.session.commit()
+                db.session.close()
 
-                print(request_body['total_time'])
-                print(session_to_edit.total_time)
-
-                # TODO update the new values to session
             else:
                 response_body = "Session does not exist"
                 return jsonify(response_body), 400

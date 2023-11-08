@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			backend_url: "https://bug-free-dollop-94rw6v5767gfg64-3001.app.github.dev/",
+			backend_url: "https://redesigned-umbrella-gwj6x9rqg9x3wqrx-3001.app.github.dev/",
 			token: null,
 			current_user: {},
 			current_sessions: [],
