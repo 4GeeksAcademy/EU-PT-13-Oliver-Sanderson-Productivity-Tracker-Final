@@ -104,9 +104,9 @@ const TodoList = () => {
         </select>
         <button onClick={handleAddWorkingTask}>Add Working Task</button>
       </div>
-      <ul>
+      <div>
         {workingTasks.map((task, index) => (
-          <li key={index}>
+          <span key={index}>
             <strong>Page Name:</strong> {task.pageName},{" "}
             <strong>Page Link:</strong> {task.pageLink},{" "}
             <strong>Frequency:</strong> {task.frequency},{" "}
@@ -128,9 +128,10 @@ const TodoList = () => {
                 />
               </>
             )}
-          </li>
+            <br />
+               </span>
         ))}
-      </ul>
+      </div>
       <h2>Rewards</h2>
       <div>
         <input
@@ -157,9 +158,9 @@ const TodoList = () => {
         </select>
         <button onClick={handleAddReward}>Add Reward</button>
       </div>
-      <ul>
+      <div>
         {rewards.map((reward, index) => (
-          <li key={index}>
+          <span key={index}>
             <strong>Page Name:</strong> {reward.pageName},{" "}
             <strong>Page Link:</strong> {reward.pageLink},{" "}
             <strong>Frequency:</strong> {reward.frequency},{" "}
@@ -181,9 +182,10 @@ const TodoList = () => {
                 />
               </>
             )}
-          </li>
+            <br />
+          </span>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

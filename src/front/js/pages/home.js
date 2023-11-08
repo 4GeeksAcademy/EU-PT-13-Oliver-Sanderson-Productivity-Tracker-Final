@@ -9,16 +9,20 @@ import Portfolio from "../component/Portfolio";
 
 
 
+
+
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="text-center mt-6">
 
-			
+
 			<Description></Description>
 			<Portfolio></Portfolio>
-			
+
+
+
 
 
 			<p>
