@@ -21,8 +21,8 @@ const Login = () => {
         return new Promise((resolve) => {
           setError("")
           let successCheck = false
-
-          fetch( store.backend_url + "api/token", {
+          console.log(process.env.BACKEND_URL + "api/token")
+          fetch( process.env.BACKEND_URL + "api/token", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({email: email, password: password}),
@@ -37,7 +37,7 @@ const Login = () => {
           .then((data) => {
             if (successCheck) {
               store.token = data["access_token"]
-              store.current_user['email'] = email
+              store.current_user["email"] = email
               resolve(true)
             } else {
               setError(data["message"])
@@ -58,8 +58,6 @@ const Login = () => {
       
       
       runFunction();
-    
-
     
 
   };

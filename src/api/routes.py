@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Session, Test
+from api.models import db, User, Session, Task, Test
 from api.utils import generate_sitemap, APIException
 import datetime
 from sqlalchemy import delete, update
@@ -13,6 +13,17 @@ from flask_jwt_extended import (
 
 
 api = Blueprint('api', __name__)
+
+@api.route('/tasks')
+def handle_tasks():
+        tasks = Task.query.all()
+
+        response_body = {}
+        for index, item in enumerate(tasks):
+            response_body["value" + str(index)] = (item.page_name)
+
+        return jsonify(response_body), 200
+
 
 @api.route('/token', methods=['POST'])
 def handle_token():
@@ -101,7 +112,16 @@ def handle_users():
                     user_to_edit.email = request_body['email']
                 
                 db.session.commit()
-                db.session.close()
+
+                response_body = []
+                temp = {}
+                temp["id"] = (user_to_edit.id)
+                temp["name"] = (user_to_edit.name)
+                temp["last_name"] = (user_to_edit.last_name)
+                temp["email"] = (user_to_edit.email)
+
+                response_body.append(temp)
+                return jsonify(response_body), 200
 
             else:
                 response_body = "User does not exist"

@@ -48,6 +48,29 @@ class Session(db.Model):
             "fun_time_secs": self.fun_time_secs,
         }
     
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    page_name = db.Column(db.String)
+    page_link = db.Column(db.String, nullable=False)
+    frequency = db.Column(db.String, nullable=False)
+    start_date = db.Column(db.DateTime, nullable=False)
+    end_date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return f'<Task {self.page_name}>' 
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "page_name": self.page_name,
+            "page_link": self.page_link,
+            "frequency": self.frequency,
+            "start_date": self.start_date,
+            "end_date": self.end_date,
+        }
+    
 class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     test_value = db.Column(db.String(120), nullable=False)
