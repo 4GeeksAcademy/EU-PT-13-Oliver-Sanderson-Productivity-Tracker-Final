@@ -15,66 +15,7 @@ export const Dashboard = () => {
 	}
 
 	useEffect(() => {
-
-		function getUser() {
-		return new Promise((resolve) => {
-		fetch( store.backend_url + "api/users", {
-        method: "GET",
-        headers: {"Authorization": "Bearer " + gotToken},
-    	})
-    	.then((recieved) => {
-			  //TODO if not ok
-        	return recieved.json()
-   		 })
-    	.then((data) => {
-        	let theUser
-        	data.forEach(element => {
-            	if( store.current_user["email"]  == element["email"]) {
-                	theUser = element
-            	}
-        });
-        store.current_user = theUser
-		setTheUsersInfo(theUser)
-        resolve(true)
-   		 })
-    	.catch((error) => console.log(error))
-		})}
-
-		function getSessions() {
-		fetch( store.backend_url + "api/sessions", {
-			method: "GET",
-			headers: {"Authorization": "Bearer " + gotToken},
-			})
-			.then((recieved) => {
-				 //TODO if not ok
-				return recieved.json()
-				})
-			.then((data) => {
-				let theSessions = []
-				data.forEach(element => {
-
-					if( store.current_user["id"] == element["user_id"]) {
-						theSessions.push(element)
-					}
-			});
-			store.current_sessions = theSessions
-			setTheSessions(theSessions)
-			console.log(store.current_sessions)
-			return data
-				})
-			.catch((error) => console.log(error))
-		}
-
-			async function runFunction() {
-				const promiseResult = await getUser();
-				if (promiseResult) {
-					getSessions()
-				}
-			  }
-			  
-			  
-			runFunction();
-
+		actions.fetchCurrentUserComplete()
 	}, []);
 
 

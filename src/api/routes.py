@@ -112,7 +112,16 @@ def handle_users():
                     user_to_edit.email = request_body['email']
                 
                 db.session.commit()
-                db.session.close()
+
+                response_body = []
+                temp = {}
+                temp["id"] = (user_to_edit.id)
+                temp["name"] = (user_to_edit.name)
+                temp["last_name"] = (user_to_edit.last_name)
+                temp["email"] = (user_to_edit.email)
+
+                response_body.append(temp)
+                return jsonify(response_body), 200
 
             else:
                 response_body = "User does not exist"
