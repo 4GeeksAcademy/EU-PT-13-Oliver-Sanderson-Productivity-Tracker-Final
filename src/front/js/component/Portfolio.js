@@ -16,7 +16,7 @@ const Portfolio = () => {
           <div className="row row-cols-1 row-cols-md-3 g-3">
             <div className="col">
               <div className="card h-100">
-                <img src= "https://picsum.photos/700/400" className="card-img-top" alt="..." />
+                <img src= "https://th.bing.com/th/id/OIP.skEC6WPFri0vkPFfBVlaYwHaE7?pid=ImgDet&w=193.99999999999997&h=129.33333333333331&c=7&dpr=2" className="card-img-top" alt="..." />
                 <div className="card-body">
                   <h5 className="card-title">Set Screen Productivity Goals</h5>
                   <p className="card-text">
@@ -28,7 +28,7 @@ const Portfolio = () => {
             </div>
             <div className="col">
               <div className="card h-100">
-                <img src="https://picsum.photos/700/400" className="card-img-top" alt="..." />
+                <img src="https://th.bing.com/th/id/OIP.jmXcSoWQ1tRTh3T_eRoG-AHaEK?pid=ImgDet&w=194&h=109.07630522088354&c=7&dpr=2" className="card-img-top" alt="..." />
                 <div className="card-body">
                   <h5 className="card-title">Track your screen time</h5>
                   <p className="card-text">
@@ -39,7 +39,7 @@ const Portfolio = () => {
             </div>
             <div className="col">
               <div className="card h-100">
-                <img src="https://picsum.photos/700/400" className="card-img-top" alt="..." />
+                <img src="https://th.bing.com/th/id/OIP.PzZ_10yRG1S3z-qz2Z9X7gHaE7?pid=ImgDet&w=194&h=129.33333333333331&c=7&dpr=2" className="card-img-top" alt="..." />
                 <div className="card-body">
                   <h5 className="card-title">Connect with friends</h5>
                   <p className="card-text">
