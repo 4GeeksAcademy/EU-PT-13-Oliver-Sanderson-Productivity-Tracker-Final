@@ -19,6 +19,8 @@ It is recomended to install the backend first, make sure you have Python 3.8, Pi
 2. Create a .env file based on the .env.example: `$ cp .env.example .env`
 3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure you replace the valudes with your database information:
 
+You might need to install JWT for backend `$ pip install flask-jwt-extended`
+
 | Engine    | DATABASE_URL                                        |
 | --------- | --------------------------------------------------- |
 | SQLite    | sqlite:////test.db                                  |
@@ -79,3 +81,92 @@ This boilerplate it's 100% read to deploy with Render.com and Heroku in a matter
 This template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
 
 You can find other templates and resources like this at the [school github page](https://github.com/4geeksacademy/).
+
+
+
+# Productivity Tracker
+
+The productivity tracker will be used during internet browsing sessions to track and record time spent using the browser overall as well as on specific websites. The aim of this application is to increase the users awareness to the amount of time spent using the web browser in total and on which websites the user is spending most time. Thus, helping the user make more informed decisions on time spent and to help them concentrate on the most productive websites. 
+
+
+# Technologies 
+
+## Front-end 
+
+The productivity tracker will use a website (single page application) as the front-end user interface built with HTML, CSS, JavaScript and React. It will have a user login system based on a JSON Web Tokens that will be required to use the application as well as viewing or editing any personal data. 
+
+## Back-end 
+
+The productivity tracker will store collected information in a backend system created with Python and the data will be accessible through a protected API. 
+
+## Tracker (Chrome Extension) 
+
+The productivity tracker itself that is used to track the users time spent on the browser and specific websites will be a Chrome Extension built using HTML, CSS and JavaScript. 
+
+# APIs 
+
+The productivity tracker will have its own API to store users information and the times related to browsing. This will be protected however may be used when working out statistics such as average time browsing per session. 
+
+Cloudinary API -  Will be used to store users profile images. 
+
+Google Maps API – Will be used to see browsing locations stored in users protected data. This can then be used to show the most productive locations. For example, browsing at home vs at the library.
+
+# Using Back-end API
+
+The current back-end URLs:
+
+* BaseURL... /api/token
+  * POST - returns a valid JWT when correct login credentials are sent. Body should follow the below format:  
+  {  
+  "email" : "user@email.com",  
+  "password" : "1234"  
+  }  
+
+* BaseURL... /api/signup
+  * POST - Add a new user. Body should follow below format:  
+  {  
+  "name" : "Fname Lname",  
+  "email" : "test343@test343.com",  
+  "password" : "1234"    
+  }  
+
+The following URLs are protected and need a valid JWT in the authentication header to access.
+Example of how fetch might look with authorization:  
+fetch(URL + "/api/sessions", {  
+				method: "GET",  
+				headers: {"Authorization": "Bearer " + token}  
+			})  
+			.then((recieved) => recieved.json())  
+			.then((data) => {  
+				return data  
+			})  
+			.catch((error) => console.log(error)  
+
+* BaseURL... /api/users
+  * GET - Shows all users
+  * PUT - Updates an existing users data. Body should follow below format:  
+  (Note that both "name" and "email" are optional here.)  
+  {  
+  "id" : 1,  
+  "name" : "newName",  
+  "email" : "newEmail"  
+  } 
+
+  * DELETE - Remove a user **and all related sessions**. Body should follow below format:  
+  {  
+  "id" : 1  
+  }  
+
+* BaseURL... /api/sessions
+  * GET - Shows all sessions
+  * POST - Add a new session. Body should follow below format:  
+  {  
+  "current_user_id" : 3,  
+  "total_time" : 1000,  
+  "work_time" : 600,  
+  "fun_time" : 400  
+  }  
+  * DELETE - Currently deletes all sessions for a specific user. Body should follow below format:  
+  {  
+  "user_id" : 1  
+  }  

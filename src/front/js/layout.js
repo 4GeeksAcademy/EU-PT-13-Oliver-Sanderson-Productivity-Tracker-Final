@@ -8,8 +8,17 @@ import { BackendURL } from "./component/backendURL";
 
 import  Home  from "./pages/Home";
 import { Demo } from "./pages/demo";
+import { Test } from "./pages/test"
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
+
+
+import { Navbar } from "./component/Navbar";
+import { Footer } from "./component/footer";
+
+import  Login  from "./pages/login";
+import { Dashboard } from "./pages/dashboard";
+import ContactUs from "./component/ContactUs";
 
 import  Navbar  from "./component/Navbar";
 import Footer from "./component/Footer";
@@ -19,6 +28,7 @@ import Dashboard from "./pages/Dashboard";
 import PomodoroTimer from "./component/PomodoroTimer";
 
 import Weather from "./pages/Weather";
+
 
 //create your first component
 const Layout = () => {
@@ -38,6 +48,11 @@ const Layout = () => {
                         <Route element={<Navbar />} path="/Navbar" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
+
+                        <Route element={<Login/>} path="/login"/>
+                        <Route element={<Dashboard/>} path="/dashboard"/>
+                        <Route element={<Test/>} path="/test"/>
+
                         <Route element={<Footer />} path="/Footer" />
                         <Route element={<ContactUs />} path="/ContactUs" />
 
@@ -45,7 +60,9 @@ const Layout = () => {
                         <Route element={<PomodoroTimer/>} path="/PomodoroTimer" />
                         
                         <Route element={<Weather/>} path="/Weather" />
+
                         <Route element={<h1>Not found!</h1>} />
+                        
                     </Routes>
                     
                     
