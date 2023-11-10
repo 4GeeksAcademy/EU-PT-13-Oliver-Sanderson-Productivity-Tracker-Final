@@ -7,7 +7,7 @@ import "../../styles/home.css";
 
 
 
-export const Home = () => {
+export const HomeOld = () => {
     const { store, actions } = useContext(Context);
 
 
@@ -30,5 +30,5 @@ export const Home = () => {
 
 
 
-export default Home;
+export default HomeOld;
 
