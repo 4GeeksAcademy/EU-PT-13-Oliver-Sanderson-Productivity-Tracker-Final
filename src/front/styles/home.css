@@ -1,7 +1,41 @@
-/*
-    home.css: This website contains selectors only used in home.css
+.navbar{ background-color: rgb(218, 226, 236)
+  
+  
+        
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.titleA{
+color: #000000;
+
+font-family: "Montserrat-Bold", Helvetica;
+font-size: 36px;
+font-weight: 700;
+left: 0;
+letter-spacing: 0.1px;
+line-height: 28px;
+margin-top: 50px;
+margin-bottom: 38px;
+white-space: nowrap;
+width: 406px;}
+
+.row-with-spacing {
+    margin-top: 2px; 
+  }
+
+.large-card{  width: 100%; 
+    height: 200px}
+
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%; 
+}
+
+.navbar-brand{
+  margin-left: 40px;
+  
+}
+
+
+
