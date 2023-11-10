@@ -1,0 +1,31 @@
+.weather-box {
+    background-color: #6e7686;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 50%; /* Adjust the width as per your requirement */
+    margin: 0 auto; /* Center the box horizontally */
+  }
+  .weather-box input {
+    padding: 8px;
+    outline: none;
+    margin-bottom: 10px;
+  }
+  
+  .weather-box p {
+    margin-bottom: 5px;
+  }
+  
+  .weather-box .box-heading {
+    margin-top: 0;
+  }
+  
+  .weather-box .loading-message {
+    margin-top: 10px;
+  }
+  
+  .weather-box .error-message {
+    color: red;
+    margin-top: 10px;
+  }
