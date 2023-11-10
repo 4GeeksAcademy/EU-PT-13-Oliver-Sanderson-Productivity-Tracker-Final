@@ -16,12 +16,12 @@ const Portfolio = () => {
           <div className="row row-cols-1 row-cols-md-3 g-3">
             <div className="col">
               <div className="card h-100">
-                <img src= "https://th.bing.com/th/id/OIP.skEC6WPFri0vkPFfBVlaYwHaE7?pid=ImgDet&w=193.99999999999997&h=129.33333333333331&c=7&dpr=2" className="card-img-top" alt="..." />
+                <img src="https://th.bing.com/th/id/OIP.skEC6WPFri0vkPFfBVlaYwHaE7?pid=ImgDet&w=193.99999999999997&h=129.33333333333331&c=7&dpr=2" className="card-img-top" alt="..." />
                 <div className="card-body">
                   <h5 className="card-title">Set Screen Productivity Goals</h5>
                   <p className="card-text">
-                  Be on top of thing by setting screen time goals! Stop wasting your time on unknown scrolling or watching useless videos.
-                    
+                    Be on top of thing by setting screen time goals! Stop wasting your time on unknown scrolling or watching useless videos.
+
                   </p>
                 </div>
               </div>
@@ -32,7 +32,7 @@ const Portfolio = () => {
                 <div className="card-body">
                   <h5 className="card-title">Track your screen time</h5>
                   <p className="card-text">
-                  Improve your efficency by tracking your screen time and learning about your habits
+                    Improve your efficency by tracking your screen time and learning about your habits
                   </p>
                 </div>
               </div>
@@ -43,7 +43,7 @@ const Portfolio = () => {
                 <div className="card-body">
                   <h5 className="card-title">Connect with friends</h5>
                   <p className="card-text">
-                  Don’t work in silence share your progress with friends and family!
+                    Don’t work in silence share your progress with friends and family!
                   </p>
                 </div>
               </div>
