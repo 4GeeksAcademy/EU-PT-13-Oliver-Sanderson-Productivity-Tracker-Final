@@ -9,10 +9,14 @@ import { Test } from "./pages/test"
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar";
+import { Navbar } from "./component/Navbar";
 import { Footer } from "./component/footer";
+
+=======
 import  Login  from "./pages/login";
 import { Dashboard } from "./pages/dashboard";
+import ContactUs from "./component/ContactUs";
+
 
 //create your first component
 const Layout = () => {
@@ -20,7 +24,7 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "https://opulent-space-memory-jx64x7qx5p5hggv-3000.app.github.dev/") return <BackendURL/ >;
 
     return (
         <div>
@@ -38,6 +42,7 @@ const Layout = () => {
                         
                     </Routes>
                     <Footer />
+                    <ContactUs/>
                 </ScrollToTop>
             </BrowserRouter>
         </div>
