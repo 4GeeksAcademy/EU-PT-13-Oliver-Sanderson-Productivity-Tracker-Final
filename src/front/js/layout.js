@@ -3,7 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import { Home } from "./pages/home";
+
+
+
+import  Home  from "./pages/Home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
@@ -11,6 +14,11 @@ import injectContext from "./store/appContext";
 import  Navbar  from "./component/Navbar";
 import Footer from "./component/Footer";
 import ContactUs from "./component/ContactUs";
+
+import Dashboard from "./pages/Dashboard";
+import PomodoroTimer from "./component/PomodoroTimer";
+
+import Weather from "./pages/Weather";
 
 //create your first component
 const Layout = () => {
@@ -26,13 +34,17 @@ const Layout = () => {
                 <ScrollToTop>
                    
                     <Routes>
-                        <Route element={<Home />} path="/" />
+                        <Route element={<Home/>} path="/" />
                         <Route element={<Navbar />} path="/Navbar" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Footer />} path="/Footer" />
                         <Route element={<ContactUs />} path="/ContactUs" />
+
+                        <Route element={<Dashboard/>} path="/Dashboard" />
+                        <Route element={<PomodoroTimer/>} path="/PomodoroTimer" />
                         
+                        <Route element={<Weather/>} path="/Weather" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     
