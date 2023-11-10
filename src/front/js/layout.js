@@ -2,27 +2,17 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
-
-
-
-
 import  Home  from "./pages/Home";
 import { Demo } from "./pages/demo";
 import { Test } from "./pages/test"
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-
-
 import  Navbar  from "./component/Navbar";
 import  Footer  from "./component/Footer";
-
 import  Login  from "./pages/login";
 import ContactUs from "./component/ContactUs";
-
-
 import Dashboard from "./pages/Dashboard";
 import PomodoroTimer from "./component/PomodoroTimer";
-
 import Weather from "./pages/Weather";
 
 
@@ -44,18 +34,13 @@ const Layout = () => {
                         <Route element={<Navbar />} path="/Navbar" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
-
                         <Route element={<Login/>} path="/login"/>
                         <Route element={<Dashboard/>} path="/dashboard"/>
                         <Route element={<Test/>} path="/test"/>
-
                         <Route element={<Footer />} path="/Footer" />
                         <Route element={<ContactUs />} path="/ContactUs" />
-
                         <Route element={<PomodoroTimer/>} path="/PomodoroTimer" />
-                        
                         <Route element={<Weather/>} path="/Weather" />
-
                         <Route element={<h1>Not found!</h1>} />
                         
                     </Routes>

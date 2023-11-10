@@ -17,9 +17,8 @@ export const Home = () => {
         <div className="text-center mt-5">
 
 
-            <h1 className="titleA ">My Activity </h1>
+            <h1 className="titleA ">Home </h1>
            
-            <Dashboard/> 
            
            
        
