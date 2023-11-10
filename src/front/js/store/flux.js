@@ -1,6 +1,9 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: null,
+			current_user: {},
+			current_sessions: [],
 			message: null,
 			demo: [
 				{
@@ -33,6 +36,80 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
+			Logout: () => {
+				setStore({ token: null })
+				setStore({ current_user: {} })
+			},
+
+			fetchLogin: async (email, password) => {
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "/api/token", {
+						method: "POST",
+						headers: {"Content-Type": "application/json"},
+						body: JSON.stringify({email: email, password: password}),
+					})
+					const data = await resp.json()
+					setStore({ token: data.access_token })
+					setStore({ current_user: {"email": email} })
+					console.log(getStore())
+					return data;
+				}
+				catch(error) {
+					console.log("Error fetching users details. ", error)
+				}
+			},
+
+			fetchUser: async () => {
+				const store = getStore();
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users", {
+						method: "GET",
+						headers: { "Authorization": "Bearer " + store.token},
+					})
+					const data = await resp.json()
+					let theUser
+					data.forEach(element => {
+						if( store.current_user["email"]  == element["email"]) {
+							theUser = element
+						}
+					});
+					setStore({current_user : theUser})
+					return data;
+				}
+				catch(error) {
+					console.log("Error fetching users details. ", error)
+				}
+			},
+
+			fetchSessionsForUser: async () => {
+				const store = getStore();
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "/api/sessions", {
+						method: "GET",
+						headers: { "Authorization": "Bearer " + store.token},
+					})
+					const data = await resp.json()
+					let currentUserSessions = []
+					data.forEach(element => {
+						if( store.current_user["id"]  == element["user_id"]) {
+							currentUserSessions.push(element)
+						}
+					});
+					setStore({current_sessions : currentUserSessions})
+					return data;
+				}
+				catch(error) {
+					console.log("Error fetching sessions details. ", error)
+				}
+			},
+
+			fetchCurrentUserComplete: async () => {
+				await getActions().fetchUser()
+				await getActions().fetchSessionsForUser()
+				console.log(getStore())
+			},
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
