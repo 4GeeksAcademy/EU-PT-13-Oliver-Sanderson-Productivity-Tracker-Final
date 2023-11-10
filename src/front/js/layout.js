@@ -13,16 +13,12 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 
-import { Navbar } from "./component/Navbar";
-import { Footer } from "./component/footer";
+import  Navbar  from "./component/Navbar";
+import  Footer  from "./component/Footer";
 
 import  Login  from "./pages/login";
-import { Dashboard } from "./pages/dashboard";
 import ContactUs from "./component/ContactUs";
 
-import  Navbar  from "./component/Navbar";
-import Footer from "./component/Footer";
-import ContactUs from "./component/ContactUs";
 
 import Dashboard from "./pages/Dashboard";
 import PomodoroTimer from "./component/PomodoroTimer";
@@ -56,7 +52,6 @@ const Layout = () => {
                         <Route element={<Footer />} path="/Footer" />
                         <Route element={<ContactUs />} path="/ContactUs" />
 
-                        <Route element={<Dashboard/>} path="/Dashboard" />
                         <Route element={<PomodoroTimer/>} path="/PomodoroTimer" />
                         
                         <Route element={<Weather/>} path="/Weather" />
