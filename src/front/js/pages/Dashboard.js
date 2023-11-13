@@ -5,8 +5,6 @@ import PomodoroTimer from '../component/PomodoroTimer';
 
 import Weather from './Weather';
 
-
-
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
   const [gotToken, setGotToken] = useState(store.token)
@@ -19,7 +17,8 @@ const Dashboard = () => {
 		actions.fetchCurrentUserComplete()
 	}, []);
 
-  console.log(store)
+  console.log(store.current_sessions)
+
 
   return (
 
@@ -75,6 +74,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h5>Time Spent</h5>
+              <p>{store.current_sessions.reduce(function (acc, obj) { return acc + obj.time_spent; }, 0) + " Seconds"}</p>
             </div>
           </div>
         </div>
