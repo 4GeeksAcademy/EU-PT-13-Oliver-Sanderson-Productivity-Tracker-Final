@@ -187,7 +187,8 @@ def handle_sessions():
         #     "id" : 23,
         #     "total_time" : 1000,
         #     "work_time" : 600,
-        #     "fun_time" : 400
+        #     "fun_time" : 400,
+        #     "url" : "http:youtube.com/1234"
         # }
 
         # Check request_body has 'id'
@@ -198,6 +199,7 @@ def handle_sessions():
                 session_to_edit.time_spent_secs = request_body['total_time']
                 session_to_edit.work_time_secs = request_body['work_time']
                 session_to_edit.fun_time_secs = request_body['fun_time']
+                session_to_edit.url = request_body['url']
                 db.session.commit()
 
                 response_body = []
@@ -208,6 +210,7 @@ def handle_sessions():
                 temp["fun_time"] = (session_to_edit.fun_time_secs)
                 temp["work_time"] = (session_to_edit.work_time_secs)
                 temp["date"] = (session_to_edit.date)
+                temp["url"] = (session_to_edit.url)
                 response_body.append(temp)
                 return jsonify(response_body), 200
 
@@ -256,6 +259,7 @@ def handle_sessions():
             session.time_spent_secs = request_body["total_time"]
             session.work_time_secs = request_body["work_time"]
             session.fun_time_secs = request_body["fun_time"]
+            session.url = request_body["url"]
 
             db.session.add(session)
             db.session.commit()
@@ -276,6 +280,7 @@ def handle_sessions():
             temp["fun_time"] = (result.fun_time_secs)
             temp["work_time"] = (result.work_time_secs)
             temp["date"] = (result.date)
+            temp["url"] = (result.url)
             response_body.append(temp)
     return jsonify(response_body), 200
 
