@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
+import { Navigate } from "react-router-dom";
 import PomodoroTimer from '../component/PomodoroTimer';
 
 import Weather from './Weather';
@@ -6,6 +8,19 @@ import Weather from './Weather';
 
 
 const Dashboard = () => {
+  const { store, actions } = useContext(Context);
+  const [gotToken, setGotToken] = useState(store.token)
+  if (!gotToken) {
+		console.log("Redirecting to login.")
+		return <Navigate to="/login" />
+	}
+
+	useEffect(() => {
+		actions.fetchCurrentUserComplete()
+	}, []);
+
+  console.log(store)
+
   return (
 
     <div className="text-wrapper"> 
@@ -16,7 +31,7 @@ const Dashboard = () => {
     <div className="card">
      
       <div className="card-body">
-      
+        <h1>Welcome {store.current_user["name"]}</h1>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { Navigate } from "react-router-dom";
 import "../../styles/home.css";
 
-export const Dashboard = () => {
+export const DashboardOLD = () => {
 	const { store, actions } = useContext(Context);
 	const [gotToken, setGotToken] = useState(store.token)
 	const [theUsersInfo, setTheUsersInfo] = useState(null)

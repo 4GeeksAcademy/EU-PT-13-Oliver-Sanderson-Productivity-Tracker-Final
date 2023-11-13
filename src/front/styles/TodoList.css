@@ -1,0 +1,28 @@
+.task-container {
+    display: flex;
+  }
+  
+  .task-list {
+    flex: 1;
+  }
+  
+  .task-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .reward-list {
+    flex: 1;
+  }
+  
+  .reward-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .task-actions,
+  .reward-actions {
+    margin-left: auto;
+  }
