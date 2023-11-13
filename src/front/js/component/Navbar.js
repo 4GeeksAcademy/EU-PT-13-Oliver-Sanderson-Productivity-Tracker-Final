@@ -12,13 +12,13 @@ const Navbar = () => {
 				<ul className="navbar-nav ml-auto">
 
 					<li className="nav-item">
-						<a className="nav-link" href="#">Home</a>
+						<a className="nav-link" href="/">Home</a>
 					</li>
 					<li className="nav-item">
-						<a className="nav-link" href="#">DashBoard</a>
+						<a className="nav-link" href="/dashboard">DashBoard</a>
 					</li>
 					<li className="nav-item">
-						<a className="nav-link" href="#">Contact Us</a>
+						<a className="nav-link" href="/ContactUs">Contact Us</a>
 					</li>
 
 				</ul>
