@@ -34,6 +34,7 @@ class Session(db.Model):
     time_spent_secs = db.Column(db.Integer, nullable=False)
     work_time_secs = db.Column(db.Integer, nullable=False)
     fun_time_secs = db.Column(db.Integer, nullable=False)
+    url = db.Column(db.String)
 
     def __repr__(self):
         return f'<Session {self.date}>'
@@ -46,6 +47,7 @@ class Session(db.Model):
             "time_spent_secs": self.time_spent_secs,
             "work_time_secs": self.work_time_secs,
             "fun_time_secs": self.fun_time_secs,
+            "url": self.url,
         }
     
 class Task(db.Model):
