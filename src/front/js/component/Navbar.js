@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 const Navbar = () => {
 	return (
@@ -21,6 +22,10 @@ const Navbar = () => {
 					</li>
 
 				</ul>
+
+				<a className="btn btn-secondary" href="login">Sign in</a>
+
+				
 			</div>
 		</nav>
 	);
