@@ -6,10 +6,6 @@ import "../../styles/home.css";
 import "../../styles/style.css"
 import Description from "../component/Description";
 import Portfolio from "../component/Portfolio";
-import WeatherComponent from "../component/WeatherComponent";
-
-
-
 
 
 
@@ -23,7 +19,7 @@ export const Home = () => {
 
 			<Description></Description>
 			<Portfolio></Portfolio>
-			<WeatherComponent></WeatherComponent>
+			
 
 
 

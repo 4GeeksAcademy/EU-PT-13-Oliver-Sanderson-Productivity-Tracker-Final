@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { Link } from "react-router-dom";
 import { useReducer } from "react";
 import "../../styles/style.css";
 
@@ -24,7 +25,11 @@ const ElevatedMedium = ({ states, leftIcon, rightIcon, className, divClassName, 
       }}
     >
       <div className={`button ${divClassName}`}>
-        {["default", "focused", "hovered", "pressed"].includes(state.states) && <>{text}</>}
+        {["default", "focused", "hovered", "pressed"].includes(state.states) && (
+          <Link to="/signup" style={{ color: "black", textDecoration: "none" }}>
+            {text}
+          </Link>
+        )}
 
         {state.states === "disabled" && <>Disabled</>}
       </div>
@@ -86,4 +91,5 @@ ElevatedMedium.propTypes = {
   rightIcon: PropTypes.bool,
   text: PropTypes.string,
 };
+
 export default ElevatedMedium;

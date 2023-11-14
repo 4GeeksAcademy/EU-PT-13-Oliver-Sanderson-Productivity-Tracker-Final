@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import Home from "./pages/Home";
+import Home from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Test } from "./pages/test";
 import { Single } from "./pages/single";
@@ -15,8 +15,12 @@ import ContactUs from "./component/ContactUs";
 import Navbar from "./component/Navbar";
 import Dashboard from "./pages/Dashboard";
 import PomodoroTimer from "./component/PomodoroTimer";
+import TodoList from "./component/TodoList";
 import Quotes from "./pages/Quotes";
 import Weather from "./component/Weather";
+import WeatherComponent from "./component/WeatherComponent";
+import Signup from "./pages/Signup";
+
 
 const Layout = () => {
 
@@ -41,6 +45,8 @@ const Layout = () => {
             <Route element={<PomodoroTimer />} path="/PomodoroTimer" />
             <Route element={<Weather />} path="/Weather" />
             <Route element={<TodoList />} path="/Todo_List" />
+            <Route element={<WeatherComponent />} path="/weather_Component" />
+            <Route element={<Signup />} path="/signup" />
             <Route element={<h1>Not found!</h1>} />
 
           </Routes>
