@@ -32,7 +32,9 @@ const Description = () => {
             states="default"
             text="Create an Account"
           />
+         
         </div>
+         
         <div className="ellipse" />
         <div className="rectangle-2" />
         <MockupSaas
