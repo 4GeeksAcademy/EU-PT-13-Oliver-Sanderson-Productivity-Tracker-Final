@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import PomodoroTimer from '../component/PomodoroTimer';
 
 import Weather from './Weather';
+import SessionBox from "../component/SessionBox";
 
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
@@ -19,6 +20,10 @@ const Dashboard = () => {
 
   console.log(store.current_sessions)
 
+  const boxStyle = {
+    maxHeight: '200px', // Set your desired fixed height
+    overflow: 'auto', // Enable scrolling if content overflows
+  };
 
   return (
 
@@ -70,11 +75,20 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className=" col-md-4">
+        <div className="col-md-4">
           <div className="card">
             <div className="card-body">
               <h5>Time Spent</h5>
               <p>{store.current_sessions.reduce(function (acc, obj) { return acc + obj.time_spent; }, 0) + " Seconds"}</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4" style={boxStyle}>
+          <div className="card" >
+            <div className="card-body">
+              <h5>Sessions</h5>
+              <hr></hr>
+              <SessionBox sessions={store.current_sessions} />
             </div>
           </div>
         </div>
