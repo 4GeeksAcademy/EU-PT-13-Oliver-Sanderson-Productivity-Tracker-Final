@@ -1,7 +1,10 @@
 .navbar{ background-color: rgb(218, 226, 236)
   
-  
         
+}
+.navbar-brand{
+  margin-left: 40px;
+  
 }
 
 .titleA{
@@ -32,10 +35,10 @@ width: 406px;}
   width: 100%; 
 }
 
-.navbar-brand{
-  margin-left: 40px;
-  
-}
+
+
+
+
 
 
 

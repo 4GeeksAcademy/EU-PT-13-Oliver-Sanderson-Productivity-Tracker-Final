@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import Dashboard from "./Dashboard";
-
+import Navbar from "../component/Navbar";
 import "../../styles/home.css";
 
 
@@ -12,17 +12,17 @@ export const HomeOld = () => {
 
 
     return (
-       <div>
-       
-        <div className="text-center mt-5">
+
+        <div>
+            <Navbar />
+            <div className="text-center mt-5">
+
+                <h1 className="titleA ">Home </h1>
 
 
-            <h1 className="titleA ">Home </h1>
-           
-           
-           
-       
-        </div>
+
+
+            </div>
         </div>
     );
 };
