@@ -40,7 +40,6 @@ const Layout = () => {
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Login />} path="/login" />
             <Route element={<Dashboard />} path="/dashboard" />
-            <Route element={<Footer />} path="/Footer" />
             <Route element={<ContactUs />} path="/ContactUs" />
             <Route element={<PomodoroTimer />} path="/PomodoroTimer" />
             <Route element={<Weather />} path="/Weather" />
