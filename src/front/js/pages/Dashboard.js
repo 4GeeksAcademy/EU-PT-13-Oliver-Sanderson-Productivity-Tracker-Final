@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Navigate } from "react-router-dom";
-import PomodoroTimer from '../component/PomodoroTimer.js';
-import Weather from "../component/Weather.js";
-import SessionBox from "../component/SessionBox.js";
-import TaskCard from "../component/TaskCard.js";
+import PomodoroTimer from "../component/PomodoroTimer";
+import Weather from "../component/Weather";
+import SessionBox from "../component/SessionBox";
+import TaskCard from "../component/TaskCard";
 
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
@@ -32,7 +32,7 @@ const Dashboard = () => {
           <div className="col-md-8">
             <div className="card">
               <div className="card-body">
-                <TaskCard></TaskCard>
+                <TaskCard />
               </div>
             </div>
           </div>
