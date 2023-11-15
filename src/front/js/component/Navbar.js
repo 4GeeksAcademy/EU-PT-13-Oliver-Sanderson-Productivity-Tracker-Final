@@ -21,7 +21,6 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-
         <div className="d-flex">
           <a className="btn btn-secondary" href="login">Sign in</a>
         </div>

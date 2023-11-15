@@ -1,16 +1,12 @@
-
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/signup.css'; // Import the CSS file for styling
 import "../../styles/home.css";
 
-const Signup= () => {
-
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
-
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
@@ -19,14 +15,12 @@ const Signup= () => {
   const handleSignup = (e) => {
     e.preventDefault();
 
-
     // Check if any field is empty
     if (!email || !firstName || !lastName || !password) {
       setErrorMessage('Please fill in all the information.');
       setSuccessMessage('');
       return;
     }
-
 
     // Perform signup logic with the form data
     // For example, you can send the data to a server or perform validation
@@ -51,18 +45,11 @@ const Signup= () => {
   }, [showPopup]);
 
   return (
-    <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
-      <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '70%' }} onSubmit={handleSignup}>
-        <h2>Signup Form</h2>
-        {showPopup && <div className="popup">{successMessage}</div>}
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-  };
-
-  return (
     <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '80%' }} onSubmit={handleSignup}>
         <h2>Signup Form</h2>
-
+        {showPopup && <div className="popup">{successMessage}</div>}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
         <div className="form-group">
           <label>Email:</label>
           <input
@@ -99,16 +86,7 @@ const Signup= () => {
             required
           />
         </div>
-
-        
         <button type="submit" className="signup-button">Submit</button>
-      
-        
-        <a href="/login" class="login-button">Sign In</a>
-       
-
-        <button type="submit" className="signup-button">Sign Up</button>
-
       </form>
     </div>
   );
