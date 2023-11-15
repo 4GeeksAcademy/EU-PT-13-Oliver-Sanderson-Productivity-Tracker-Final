@@ -92,7 +92,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h5>Sessions</h5>
               <hr></hr>
-              <SessionBox sessions={store.current_sessions} />
+              {store.current_sessions ? <SessionBox sessions={store.current_sessions} /> : <div>No recorded sessions!</div>}
             </div>
           </div>
         </div>
