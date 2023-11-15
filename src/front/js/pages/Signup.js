@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from '../store/appContext';
 import '../../styles/signup.css'; // Import the CSS file for styling
 
 const Signup= () => {
+  const { store, actions } = useContext(Context);
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -12,6 +14,7 @@ const Signup= () => {
 
     // Perform signup logic with the form data
     // For example, you can send the data to a server or perform validation
+    actions.fetchSignUp(firstName, lastName, email, password)
 
     // Reset the form fields
     setEmail('');
