@@ -19,7 +19,7 @@ import TodoList from "./component/TodoList";
 import Quotes from "./pages/Quotes";
 import Weather from "./component/Weather";
 import WeatherComponent from "./component/WeatherComponent";
-import Signup from "./pages/Signup";
+import Signup from "./pages/signup";
 
 
 const Layout = () => {
@@ -51,7 +51,7 @@ const Layout = () => {
           </Routes>
         </ScrollToTop>
       </BrowserRouter>
-      <Footer />
+     
     </div>
   );
 };
