@@ -42,6 +42,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ current_user: {} })
 			},
 
+			fetchSignUp: (fName, lName, email, password) => {
+				fetch(process.env.BACKEND_URL + "api/signup", {
+					method: "POST",
+					headers: {"Content-Type": "application/json"},
+					body: JSON.stringify({name: fName, last_name: lName, email: email, password: password}),
+				}).then((recieved) => {
+					// TODO check if ok
+					if(recieved.ok) {
+						console.log("User created!")
+					}
+					return recieved.json()
+				  })
+				  .then((data) => {
+					return data
+				  }).catch((error) => console.log(error))
+			},
+
 			fetchLogin: async (email, password) => {
 				try{
 					const resp = await fetch(process.env.BACKEND_URL + "/api/token", {
