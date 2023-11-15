@@ -11,9 +11,7 @@ const SessionBox = (props) => {
 
   return (
     <div>
-      <p>
         {allSessions}
-      </p>
     </div>
   );
 };
