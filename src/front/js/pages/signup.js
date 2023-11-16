@@ -22,8 +22,8 @@ const Signup= () => {
   };
 
   return (
-    <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '80%' }} onSubmit={handleSignup}>
+    <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+      <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '70%' }} onSubmit={handleSignup}>
         <h2>Signup Form</h2>
         <div className="form-group">
           <label>Email:</label>
@@ -61,7 +61,12 @@ const Signup= () => {
             required
           />
         </div>
-        <button type="submit" className="signup-button">Sign Up</button>
+        
+        <button type="submit" className="signup-button">Submit</button>
+      
+        
+        <a href="/login" class="login-button">Sign In</a>
+       
       </form>
     </div>
   );
