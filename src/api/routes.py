@@ -281,24 +281,30 @@ def handle_tasks():
 
         # Example POST body:
         # {
-        #     "current_user_id" : 3,
+        #     "user_id" : 1,
         #     "page_name" : "The page",
         #     "page_link" : "URL.com",
         #     "frequency" : "daily",
         #     "start_date" : "1000-01-01 00:00:00",
-        #     "end_date" : "9999-12-31 23:59:59"
+        #     "end_date" : "9999-12-31 23:59:59",
+        #     "reward_name" : "Play Game",
+        #     "reward_link" : "www.games.com",
+        #     "reward_duration" : 300
         # }
 
         request_body = request.get_json()
         # Check request_body has all required fields
-        if ('user_id' in request_body and 'page_name' in request_body and 'page_link' in request_body and 'frequency' in request_body and 'start_date' in request_body and 'end_date' in request_body):
+        if ('user_id' in request_body and 'page_name' in request_body and 'page_link' in request_body and 'start_date' in request_body and 'end_date' in request_body and 'reward_duration' in request_body and 'reward_name' in request_body and 'reward_link' in request_body):
             new_task = Task()
             new_task.user_id = request_body["user_id"]
             new_task.page_name = request_body["page_name"]
             new_task.page_link = request_body["page_link"]
-            new_task.frequency = request_body["frequency"]
+            new_task.frequency = "Once"
             new_task.start_date = request_body["start_date"]
             new_task.end_date = request_body["end_date"]
+            new_task.reward_name = request_body["reward_name"]
+            new_task.reward_link = request_body["reward_link"]
+            new_task.reward_duration = request_body["reward_duration"]
 
             db.session.add(new_task)
             db.session.commit()
@@ -336,9 +342,12 @@ def handle_tasks():
             temp["user_id"] = (result.user_id)
             temp["page_name"] = (result.page_name)
             temp["page_link"] = (result.page_link)
-            temp["frequency"] = (result.frequency)
+            # temp["frequency"] = (result.frequency)
             temp["start_date"] = (result.start_date)
             temp["end_date"] = (result.end_date)
+            temp["reward_name"] = (result.reward_name)
+            temp["reward_link"] = (result.reward_link)
+            temp["reward_duration"] = (result.reward_duration)
             response_body.append(temp)
     return jsonify(response_body), 200
 

@@ -18,7 +18,7 @@ const Description = () => {
          <p className="lead text-muted text-wrap lh-base my-4"> Be part of the 1% with our beta. Maximize accomplishments
           with our chrome extension designed to monitor your browsing time. Take command of your tasks, 
           triumph over your objectives, and leverage your time judiciously.</p>  
-        <div className="Create an Account "> <button className=" d-grid gap-4 col-3 Create an Account btn btn-secondary "> Click to start now</button>  </div>
+        <div className="Create an Account "> <a className=" d-grid gap-4 col-3 Create an Account btn btn-secondary " href="signup">Click to start now</a>  </div>
         </div>
         </div> 
         </div><div className="description-content ">

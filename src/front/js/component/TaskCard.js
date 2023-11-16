@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from "../store/appContext";
 
 const TaskCard = () => {
+  const { store, actions } = useContext(Context);
   const [tasks, setTasks] = useState([]);
   const [taskName, setTaskName] = useState('');
   const [taskLink, setTaskLink] = useState('');
@@ -35,7 +37,22 @@ const TaskCard = () => {
       rewardDuration: rewardDuration === 'custom' ? customRewardDuration : rewardDuration,
     };
 
+    const taskToSend = {
+      "user_id" : store.current_user.id,
+      "page_name" : taskName,
+      "page_link" : taskLink,
+      "start_date" : startDate,
+      "end_date" : endDate,
+      "reward_name" : rewardName,
+      "reward_link" : rewardLink,
+      "reward_duration" : 300 //Currently set as 300 secs as it needs an int value
+    }
+
     setTasks([...tasks, newTask]);
+
+    // Sending task to backend
+    actions.fetchSendTask(taskToSend)
+
 
     // Clear form fields after submission
     setTaskName('');
@@ -160,7 +177,7 @@ const TaskCard = () => {
                   value={rewardDuration}
                   onChange={(e) => setRewardDuration(e.target.value)}
                 >
-                  <option value="5m">5 minutes</option>
+                  <option value="5m">5 minutes</option> {/* Can the values here be in seconds, so 300 for 5 mins? */}
                   <option value="15m">15 minutes</option>
                   <option value="30m">30 minutes</option>
                   <option value="custom">Custom</option>

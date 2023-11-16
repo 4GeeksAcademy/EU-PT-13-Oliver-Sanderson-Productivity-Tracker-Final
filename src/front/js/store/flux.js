@@ -42,6 +42,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ current_user: {} })
 			},
 
+			fetchSendTask: async (taskObject) => {
+				const store = getStore();
+
+				console.log(taskObject)
+				console.log(store.token)
+
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "api/tasks", {
+						method: "POST",
+						headers: { "Authorization": "Bearer " + store.token, "Content-Type": "application/json"},
+						body: JSON.stringify(
+							{
+								user_id : taskObject["user_id"],
+								page_name : taskObject["page_name"],
+								page_link : taskObject["page_link"],
+								frequency : taskObject["frequency"],
+								start_date : taskObject["start_date"],
+								end_date : taskObject["end_date"],
+								reward_name : taskObject["reward_name"],
+								reward_link : taskObject["reward_link"],
+								reward_duration : taskObject["reward_duration"]
+							}
+						)
+
+					})
+					const data = await resp.json()
+					console.log(data)
+					return data;
+				}
+				catch(error) {
+					console.log("AN ERROR")
+				}
+			},
+
 			fetchSignUp: (fName, lName, email, password) => {
 				fetch(process.env.BACKEND_URL + "api/signup", {
 					method: "POST",
@@ -95,7 +129,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return data;
 				}
 				catch(error) {
-					console.log("Error fetching users details. ", error)
+					const real = error.json()
+					console.log("Error fetching users details. ", real)
 				}
 			},
 

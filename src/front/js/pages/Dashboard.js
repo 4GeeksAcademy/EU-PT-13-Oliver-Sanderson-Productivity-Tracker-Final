@@ -14,6 +14,18 @@ const Dashboard = () => {
     return <Navigate to="/login" />
   }
 
+  const theTask = {
+		"user_id" : 1,
+		"page_name" : "The page",
+		"page_link" : "URL.com",
+		"frequency" : "daily",
+		"start_date" : "1000-01-01 00:00:00",
+		"end_date" : "9999-12-31 23:59:59",
+		"reward_name" : "Play Game",
+		"reward_link" : "www.games.com",
+		"reward_duration" : 300
+	}
+
   useEffect(() => {
     actions.fetchCurrentUserComplete()
   }, []);
@@ -44,6 +56,7 @@ const Dashboard = () => {
                   <div className="card">
                     <div className="card-body">
                       <h1>Welcome {store.current_user["name"]}</h1>
+                      <button onClick={() => console.log(actions.fetchSendTask(theTask))}> SEND EXAMPLE TASK</button>
                     </div>
                   </div>
                 </div>
