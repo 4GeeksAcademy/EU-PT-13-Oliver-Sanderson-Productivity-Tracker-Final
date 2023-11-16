@@ -13,8 +13,6 @@ const Signup= () => {
 
     // Perform signup logic with the form data
     // For example, you can send the data to a server or perform validation
-    actions.fetchSignUp(firstName, lastName, email, password)
-
 
     // Reset the form fields
     setEmail('');
