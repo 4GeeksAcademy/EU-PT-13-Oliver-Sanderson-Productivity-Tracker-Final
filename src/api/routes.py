@@ -277,6 +277,36 @@ def handle_sessions():
 @api.route('/tasks', methods=['GET', 'POST', 'DELETE'])
 @jwt_required()
 def handle_tasks():
+
+    if request.method == "DELETE":
+        request_body = request.get_json()
+
+        # Example DELETE body:
+        # {
+        # "id" : 1
+        # }
+
+        # Check request_body has 'id'
+        if ('id' in request_body):
+
+            # Check the user exists
+            task_to_delete  = Task.query.filter(Task.id == request_body["id"]).first()
+            if task_to_delete is not None:
+                Task.query.filter(Task.id == request_body["id"]).delete()
+                db.session.commit()
+
+                response_body = "Task deleted"
+                return jsonify(response_body), 200
+            else:
+                response_body = "Task does not exist"
+                return jsonify(response_body), 401
+            
+        else: 
+            response_body = "Missing body content. Need 'id' of the task to delete."
+            return jsonify(response_body), 400
+
+
+
     if request.method == "POST":
 
         # Example POST body:
@@ -316,22 +346,6 @@ def handle_tasks():
             response_body = "Missing body content"
             return jsonify(response_body), 400
     
-    if request.method == "DELETE":
-
-        # Example POST body:
-        # {
-        #     "id" : 1
-        # }
-
-        request_body = request.get_json()
-
-        # Check request_body has 'id'
-        if ('id' in request_body):
-            Task.query.filter(Task.id == request_body['id']).delete()
-            db.session.commit()
-        else:
-            response_body = "Missing body content. Need 'id' of the related task to delete."
-            return jsonify(response_body), 400
 
 
     response_body = []

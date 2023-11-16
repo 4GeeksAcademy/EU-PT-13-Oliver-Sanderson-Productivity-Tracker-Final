@@ -43,6 +43,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ current_user: {} })
 			},
 
+			fetchDeleteTask: async(deleteID) => {
+				console.log(deleteID)
+				const store = getStore();
+
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "api/tasks", {
+						method: "DELETE",
+						headers: { "Authorization": "Bearer " + store.token, "Content-Type": "application/json"},
+						body: JSON.stringify(
+							{
+								id : deleteID
+							})
+					})
+					const data = await resp.json()
+					console.log(data)
+					return data;
+				}
+				catch(error) {
+					console.log("AN ERROR")
+				}
+
+			},
+
 			fetchSendTask: async (taskObject) => {
 				const store = getStore();
 

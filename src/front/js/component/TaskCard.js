@@ -260,9 +260,8 @@ const TaskCard = () => {
                     <td>{task.end_date}</td>
                     <td>
                       <button
-                        disabled={true}
                         className="btn btn-danger"
-                        onClick={() => handleDeleteTask(task.id)}
+                        onClick={() => actions.fetchDeleteTask(task.id)}
                       >
                         Delete
                       </button>
