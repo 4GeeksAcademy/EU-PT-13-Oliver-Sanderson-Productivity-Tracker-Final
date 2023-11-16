@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			current_user: {},
 			current_sessions: [],
+			current_tasks: [],
 			message: null,
 			demo: [
 				{
@@ -156,9 +157,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			fetchTasksForUser: async (user_id) => {
+				const store = getStore();
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "api/tasks",{
+						headers: { "Authorization": "Bearer " + store.token}
+					})
+					const data = await resp.json()
+					let currentUserTasks = []
+					data.forEach(element => {
+						if( store.current_user["id"]  == element["user_id"]) {
+							currentUserTasks.push(element)
+						}
+					});
+					setStore({current_tasks : currentUserTasks})
+					return data;
+				}
+				catch(error) {
+					console.log("AN ERROR")
+				}
+			},
+
 			fetchCurrentUserComplete: async () => {
 				await getActions().fetchUser()
 				await getActions().fetchSessionsForUser()
+				await getActions().fetchTasksForUser()
 				console.log(getStore())
 			},
 

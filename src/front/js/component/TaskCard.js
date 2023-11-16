@@ -14,6 +14,7 @@ const TaskCard = () => {
   const [customRewardDuration, setCustomRewardDuration] = useState('');
   const [error, setError] = useState('');
 
+
   const isTaskValid = () => {
     return taskName.trim() !== '' && taskLink.trim() !== '' && rewardName.trim() !== '' && rewardLink.trim() !== '';
   };
@@ -239,6 +240,27 @@ const TaskCard = () => {
                     <td>{task.endDate}</td>
                     <td>
                       <button
+                        className="btn btn-danger"
+                        onClick={() => handleDeleteTask(task.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {/* Backend version */}
+                <hr/>
+                <h4>Backend data</h4>
+                {store.current_tasks.map((task) => (
+                  <tr key={task.id}>
+                    <th scope="row">{task.id}</th>
+                    <td>{task.page_name}</td>
+                    <td>{task.reward_name}</td>
+                    <td>{task.start_date}</td>
+                    <td>{task.end_date}</td>
+                    <td>
+                      <button
+                        disabled={true}
                         className="btn btn-danger"
                         onClick={() => handleDeleteTask(task.id)}
                       >
