@@ -1,9 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Context } from '../store/appContext'
+import React, { useState, useEffect } from 'react';
 import '../../styles/signup.css'; // Import the CSS file for styling
 
 const Signup = () => {
-  const { store, actions } = useContext(Context);
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -24,8 +22,6 @@ const Signup = () => {
 
     // Perform signup logic with the form data
     // For example, you can send the data to a server or perform validation
-    actions.fetchSignUp(firstName, lastName, email, password)
-
 
     // Reset the form fields
     setEmail('');
@@ -47,8 +43,8 @@ const Signup = () => {
   }, [showPopup]);
 
   return (
-    <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '80%' }} onSubmit={handleSignup}>
+    <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+      <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '70%' }} onSubmit={handleSignup}>
         <h2>Signup Form</h2>
         {showPopup && <div className="popup">{successMessage}</div>}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
@@ -88,7 +84,12 @@ const Signup = () => {
             required
           />
         </div>
+        
         <button type="submit" className="signup-button">Submit</button>
+      
+        
+        <a href="/login" class="login-button">Sign In</a>
+       
       </form>
     </div>
   );
