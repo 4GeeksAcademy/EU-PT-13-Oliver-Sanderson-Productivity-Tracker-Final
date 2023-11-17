@@ -50,7 +50,7 @@ const Dashboard = () => {
                 <div className="col">
                   <div className="card">
                     <div className="card-body">
-                      <Weather />
+                      {/* <Weather /> */}
                     </div>
                   </div>
                 </div>
@@ -67,7 +67,7 @@ const Dashboard = () => {
                 <PomodoroTimer />
               </div>
 
-               <Weather />
+               {/* <Weather /> */}
             </div>
           </div>
         </div>

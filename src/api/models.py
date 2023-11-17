@@ -101,9 +101,16 @@ class Test(db.Model):
 
 
 class StatisticTaskGenerator:
-
     def __init__(self, task_id):
-        task_id = Test.query.filter_by(id = task_id).first()
+        the_task = Task.query.filter_by(id = task_id).first()
+        print(the_task.page_link)
+        sessions = Session.query.filter_by(url = the_task.page_link).all()
+        print(sessions[0].time_spent_secs)
+        # Need to check sessions match current user then total 'time_spent_secs' for them all to see if the task is complete.
+
 
     def calculate_statistic(self):
+        return {
+            "completed": "YESorNO",
+        }
         pass
