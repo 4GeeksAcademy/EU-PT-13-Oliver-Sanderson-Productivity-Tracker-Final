@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Navigate } from "react-router-dom";
 import PomodoroTimer from "../component/PomodoroTimer";
-import Weather from "../component/Weather";
+import WeatherComponent from "../component/WeatherComponent";
 import SessionBox from "../component/SessionBox";
 import TaskCard from "../component/TaskCard";
 
