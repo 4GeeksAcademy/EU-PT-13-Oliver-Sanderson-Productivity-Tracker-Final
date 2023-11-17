@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,6 +23,7 @@ const Navbar = () => {
           </ul>
         </div>
 
+       
         <div className="d-flex">
           <a className="btn btn-secondary" href="login">Sign in</a>
         </div>
@@ -31,3 +33,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
