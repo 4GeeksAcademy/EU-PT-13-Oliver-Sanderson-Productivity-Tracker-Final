@@ -116,30 +116,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return data
 				  }).catch((error) => console.log(error))
 			},
-			fetchContactUs: ( email, message) => {
-				console.log("CONTACT US CALLED")
-				fetch(process.env.BACKEND_URL + "api/contactus", {
-					method: "POST",
-					headers: {"Content-Type": "application/json"},
-					body: JSON.stringify({ email: email, message: message}),
-				}).then((recieved) => {
-					// TODO check if ok
-					if(recieved.ok) {
-						console.log("Information Saved!")
-					}
-					return recieved.json()
-				  })
-				  .then((data) => {
-					return data
-				  }).catch((error) => console.log(error))
-			},
 
 			fetchLogin: async (email, password) => {
 				try{
 					const resp = await fetch(process.env.BACKEND_URL + "/api/token", {
 						method: "POST",
 						headers: {"Content-Type": "application/json"},
-						body: JSON.stringify({email: email, paßssword: password}),
+						body: JSON.stringify({email: email, password: password}),
 					})
 					const data = await resp.json()
 					setStore({ token: data.access_token })
