@@ -4,9 +4,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-
-    <div className="bg-light text-center py-3">
-
+    <div className=" bg-light text-center py-3">
       <p>
         &copy; Your Website {year} |{" "}
         <a href="#" className="text-decoration-none">
