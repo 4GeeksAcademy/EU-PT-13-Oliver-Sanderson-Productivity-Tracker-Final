@@ -1,3 +1,4 @@
+
 .description {
 
   height: 600px;
@@ -14,6 +15,7 @@
 
 .description-content {
 
+ margin-top: 20px;
   display: flex;
 
   flex-direction: column;

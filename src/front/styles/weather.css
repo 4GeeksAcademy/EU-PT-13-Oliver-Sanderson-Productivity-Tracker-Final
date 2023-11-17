@@ -1,0 +1,18 @@
+.weather-box {
+    border: 1px solid #f1f1f1;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+  }
+  
+  .box-heading {
+    color: #333;
+  }
+  
+  input {
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  

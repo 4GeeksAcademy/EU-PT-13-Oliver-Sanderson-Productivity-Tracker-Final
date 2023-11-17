@@ -1,0 +1,55 @@
+.signup-container {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  background-color: #409f40
+}
+
+form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  width: 50%;
+  margin-top: 300px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.signup-button,
+.login-button {
+  background-color: #727274;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px; /* Add a right margin for the gap */
+}
+
+.signup-button:hover,
+.login-button:hover {
+  background-color: #a5a8ab;
+}
+
+.signup-button:disabled {
+  background-color: #ced4da;
+  cursor: not-allowed;
+}
