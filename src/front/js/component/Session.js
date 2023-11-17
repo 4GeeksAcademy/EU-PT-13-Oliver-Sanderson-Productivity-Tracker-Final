@@ -4,7 +4,7 @@ import React, { Component } from "react";
 const Session = (props) => {
 
   return (
-    <div>
+    <div key={props.theSession.id}>
     <div className="row">
     <div className="col-8">
       <b>Date:</b> {props.theSession.date}

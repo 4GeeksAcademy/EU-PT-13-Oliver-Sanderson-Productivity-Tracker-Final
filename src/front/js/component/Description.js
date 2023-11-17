@@ -9,29 +9,25 @@ const Description = () => {
     <div className="description">
       <div className="overlap-group">
       <div className="heading-container">
-        <h2 className="heading">Enhance Productivity and Acheive greater efficiency</h2>
+        <h1> Boost your effectiveness using <strong>KorYoku</strong></h1>
+     
+       
+
+        <div>
+        <div class="col-lg-7 md-5">
+         <p className="lead text-muted text-wrap lh-base my-4"> Be part of the 1% with our beta. Maximize accomplishments
+          with our chrome extension designed to monitor your browsing time. Take command of your tasks, 
+          triumph over your objectives, and leverage your time judiciously.</p>  
+        <div className="Create an Account "> <a className=" d-grid gap-4 col-3 Create an Account btn btn-secondary " href="signup">Click to start now</a>  </div>
         </div>
-        <div className="description-content">
-          <OpenSansMontserrat
-            className="open-sans-montserrat-instance"
-            embraceLifeSClassName="open-sans-montserrat-2"
-            hasDiv={false}
-            hasItSABigWorldOut={false}
-            hasStyles={false}
-            itSABigWorldOutClassName="design-component-instance-node"
-            text=""
-            text1="Stay organized, focused, and achieve more with our powerful productivity web app to monitor your browing time.     
-                 Take control of your tasks, conquer your goals. 
-                 Utilize your time wisely."
-          />
-          <ElevatedMedium
-            className="elevated-medium-elevated-button"
-            divClassName="elevated-medium-instance"
-            leftIcon={false}
-            rightIcon={false}
-            states="default"
-            text="Create an Account"
-          />
+        </div> 
+        </div><div className="description-content ">
+          
+      
+        
+        
+
+        
          
         </div>
          

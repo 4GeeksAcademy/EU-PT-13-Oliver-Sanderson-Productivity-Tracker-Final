@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import { Home } from "./pages/home";
+import Home  from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Test } from "./pages/test";
 import { Single } from "./pages/single";
@@ -16,7 +16,7 @@ import Navbar from "./component/Navbar";
 import Dashboard from "./pages/Dashboard";
 import PomodoroTimer from "./component/PomodoroTimer";
 import TodoList from "./component/TodoList";
-import Quotes from "./pages/Quotes";
+import Quotes from "./pages/quotes";
 import Weather from "./component/Weather";
 import WeatherComponent from "./component/WeatherComponent";
 import Signup from "./pages/signup";
@@ -33,6 +33,7 @@ const Layout = () => {
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Navbar />
+          
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Navbar />} path="/Navbar" />
@@ -42,8 +43,7 @@ const Layout = () => {
             <Route element={<Dashboard />} path="/dashboard" />
             <Route element={<ContactUs />} path="/ContactUs" />
             <Route element={<PomodoroTimer />} path="/PomodoroTimer" />
-            <Route element={<Weather />} path="/Weather" />
-            <Route element={<TodoList />} path="/Todo_List" />
+            <Route element={<Quotes />} path="/Quotes" />
             <Route element={<WeatherComponent />} path="/weather_Component" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<h1>Not found!</h1>} />
@@ -51,7 +51,9 @@ const Layout = () => {
           </Routes>
         </ScrollToTop>
       </BrowserRouter>
-     
+
+      <Footer/>
+
     </div>
   );
 };

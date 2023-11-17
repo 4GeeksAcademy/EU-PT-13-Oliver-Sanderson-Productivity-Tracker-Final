@@ -55,9 +55,12 @@ class Task(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     page_name = db.Column(db.String)
     page_link = db.Column(db.String, nullable=False)
-    frequency = db.Column(db.String, nullable=False)
+    frequency = db.Column(db.String) #not used
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
+    reward_name = db.Column(db.String)
+    reward_link = db.Column(db.String)
+    reward_duration = db.Column(db.Integer)
 
     def __repr__(self):
         return f'<Task {self.page_name}>' 
@@ -68,9 +71,12 @@ class Task(db.Model):
             "user_id": self.user_id,
             "page_name": self.page_name,
             "page_link": self.page_link,
-            "frequency": self.frequency,
+            # "frequency": self.frequency,
             "start_date": self.start_date,
             "end_date": self.end_date,
+            "reward_name" : self.reward_name,
+            "reward_link" : self.reward_link,
+            "reward_duration" : self.reward_duration,
         }
     
 class Test(db.Model):

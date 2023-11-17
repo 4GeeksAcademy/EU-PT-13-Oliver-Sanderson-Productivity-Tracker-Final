@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from "../store/appContext";
 
 const TaskCard = () => {
+  const { store, actions } = useContext(Context);
   const [tasks, setTasks] = useState([]);
   const [taskName, setTaskName] = useState('');
   const [taskLink, setTaskLink] = useState('');
@@ -11,6 +13,7 @@ const TaskCard = () => {
   const [rewardDuration, setRewardDuration] = useState('');
   const [customRewardDuration, setCustomRewardDuration] = useState('');
   const [error, setError] = useState('');
+
 
   const isTaskValid = () => {
     return taskName.trim() !== '' && taskLink.trim() !== '' && rewardName.trim() !== '' && rewardLink.trim() !== '';
@@ -35,7 +38,22 @@ const TaskCard = () => {
       rewardDuration: rewardDuration === 'custom' ? customRewardDuration : rewardDuration,
     };
 
+    const taskToSend = {
+      "user_id" : store.current_user.id,
+      "page_name" : taskName,
+      "page_link" : taskLink,
+      "start_date" : startDate,
+      "end_date" : endDate,
+      "reward_name" : rewardName,
+      "reward_link" : rewardLink,
+      "reward_duration" : 300 //Currently set as 300 secs as it needs an int value
+    }
+
     setTasks([...tasks, newTask]);
+
+    // Sending task to backend
+    actions.fetchSendTask(taskToSend)
+
 
     // Clear form fields after submission
     setTaskName('');
@@ -160,7 +178,7 @@ const TaskCard = () => {
                   value={rewardDuration}
                   onChange={(e) => setRewardDuration(e.target.value)}
                 >
-                  <option value="5m">5 minutes</option>
+                  <option value="5m">5 minutes</option> {/* Can the values here be in seconds, so 300 for 5 mins? */}
                   <option value="15m">15 minutes</option>
                   <option value="30m">30 minutes</option>
                   <option value="custom">Custom</option>
@@ -224,6 +242,26 @@ const TaskCard = () => {
                       <button
                         className="btn btn-danger"
                         onClick={() => handleDeleteTask(task.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {/* Backend version */}
+                <hr/>
+                <h4>Backend data</h4>
+                {store.current_tasks.map((task) => (
+                  <tr key={task.id}>
+                    <th scope="row">{task.id}</th>
+                    <td>{task.page_name}</td>
+                    <td>{task.reward_name}</td>
+                    <td>{task.start_date}</td>
+                    <td>{task.end_date}</td>
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => actions.fetchDeleteTask(task.id)}
                       >
                         Delete
                       </button>
