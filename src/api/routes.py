@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Session, Task, Test
+from api.models import db, User, Session, Task, Test, StatisticTaskGenerator
 from api.utils import generate_sitemap, APIException
 import datetime
 from sqlalchemy import delete, update
@@ -364,6 +364,12 @@ def handle_tasks():
             temp["reward_duration"] = (result.reward_duration)
             response_body.append(temp)
     return jsonify(response_body), 200
+
+
+@api.route('/tasks/:task_id/statistics', methods=['GET'])
+def calculate_task_statistics():
+    statistics =  StatisticTaskGenerator(task_id).calculate_statistic()
+    return jsonify(statistics), 200
 
 
 @api.route('/test', methods=['GET', 'DELETE'])

@@ -98,3 +98,12 @@ class Test(db.Model):
             "id": self.id,
             "test_value": self.test_value,
         }
+
+
+class StatisticTaskGenerator:
+
+    def __init__(self, task_id):
+        task_id = Test.query.filter_by(id = task_id).first()
+
+    def calculate_statistic(self):
+        pass
