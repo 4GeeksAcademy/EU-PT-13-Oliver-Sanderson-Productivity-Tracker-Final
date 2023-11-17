@@ -9,10 +9,6 @@ import TaskCard from "../component/TaskCard";
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
   const [gotToken, setGotToken] = useState(store.token)
-  if (!gotToken) {
-    console.log("Redirecting to login.")
-    return <Navigate to="/login" />
-  }
 
   useEffect(() => {
     actions.fetchCurrentUserComplete()
@@ -50,7 +46,7 @@ const Dashboard = () => {
                 <div className="col">
                   <div className="card">
                     <div className="card-body">
-                      <Weather />
+                      <WeatherComponent />
                     </div>
                   </div>
                 </div>
@@ -67,7 +63,7 @@ const Dashboard = () => {
                 <PomodoroTimer />
               </div>
 
-               <Weather />
+              <WeatherComponent />
             </div>
           </div>
         </div>
