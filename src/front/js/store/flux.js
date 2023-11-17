@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			current_user: {},
 			current_sessions: [],
+			current_tasks: [],
 			message: null,
 			demo: [
 				{
@@ -40,6 +41,63 @@ const getState = ({ getStore, getActions, setStore }) => {
 			Logout: () => {
 				setStore({ token: null })
 				setStore({ current_user: {} })
+			},
+
+			fetchDeleteTask: async(deleteID) => {
+				console.log(deleteID)
+				const store = getStore();
+
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "api/tasks", {
+						method: "DELETE",
+						headers: { "Authorization": "Bearer " + store.token, "Content-Type": "application/json"},
+						body: JSON.stringify(
+							{
+								id : deleteID
+							})
+					})
+					const data = await resp.json()
+					console.log(data)
+					return data;
+				}
+				catch(error) {
+					console.log("AN ERROR")
+				}
+
+			},
+
+			fetchSendTask: async (taskObject) => {
+				const store = getStore();
+
+				console.log(taskObject)
+				console.log(store.token)
+
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "api/tasks", {
+						method: "POST",
+						headers: { "Authorization": "Bearer " + store.token, "Content-Type": "application/json"},
+						body: JSON.stringify(
+							{
+								user_id : taskObject["user_id"],
+								page_name : taskObject["page_name"],
+								page_link : taskObject["page_link"],
+								frequency : taskObject["frequency"],
+								start_date : taskObject["start_date"],
+								end_date : taskObject["end_date"],
+								reward_name : taskObject["reward_name"],
+								reward_link : taskObject["reward_link"],
+								reward_duration : taskObject["reward_duration"]
+							}
+						)
+
+					})
+					const data = await resp.json()
+					console.log(data)
+					return data;
+				}
+				catch(error) {
+					console.log("AN ERROR")
+				}
 			},
 
 			fetchSignUp: (fName, lName, email, password) => {
@@ -95,7 +153,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return data;
 				}
 				catch(error) {
-					console.log("Error fetching users details. ", error)
+					const real = error.json()
+					console.log("Error fetching users details. ", real)
 				}
 			},
 
@@ -121,9 +180,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			fetchTasksForUser: async (user_id) => {
+				const store = getStore();
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "api/tasks",{
+						headers: { "Authorization": "Bearer " + store.token}
+					})
+					const data = await resp.json()
+					let currentUserTasks = []
+					data.forEach(element => {
+						if( store.current_user["id"]  == element["user_id"]) {
+							currentUserTasks.push(element)
+						}
+					});
+					setStore({current_tasks : currentUserTasks})
+					return data;
+				}
+				catch(error) {
+					console.log("AN ERROR")
+				}
+			},
+
 			fetchCurrentUserComplete: async () => {
 				await getActions().fetchUser()
 				await getActions().fetchSessionsForUser()
+				await getActions().fetchTasksForUser()
 				console.log(getStore())
 			},
 
