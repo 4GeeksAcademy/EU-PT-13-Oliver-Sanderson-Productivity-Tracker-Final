@@ -373,8 +373,9 @@ def get_tasks():
     
     return jsonify(serialized_tasks), 200
 
-@api.route('/tasks/:task_id/statistics', methods=['GET'])
-def calculate_task_statistics():
+@api.route('/tasks/<int:task_id>/statistics', methods=['GET'])
+def calculate_task_statistics(task_id):
+    print(task_id)
     statistics =  StatisticTaskGenerator(task_id).calculate_statistic()
     return jsonify(statistics), 200
 
