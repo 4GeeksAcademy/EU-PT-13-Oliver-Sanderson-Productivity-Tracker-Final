@@ -8,9 +8,8 @@ import datetime
 from sqlalchemy import delete, update
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
-    get_jwt_identity, 
+    get_jwt_identity, current_user
 )
-
 
 api = Blueprint('api', __name__)
 
@@ -365,6 +364,14 @@ def handle_tasks():
             response_body.append(temp)
     return jsonify(response_body), 200
 
+
+@api.route('/me/tasks', methods=['GET'])
+@jwt_required()
+def get_tasks():
+    print("HELLO HELLO")
+    serialized_tasks = list(map(lambda t: t.serialize(), current_user.tasks))
+    
+    return jsonify(serialized_tasks), 200
 
 @api.route('/tasks/:task_id/statistics', methods=['GET'])
 def calculate_task_statistics():

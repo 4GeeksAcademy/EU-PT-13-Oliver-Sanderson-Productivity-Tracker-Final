@@ -8,10 +8,11 @@ db = SQLAlchemy()
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    name = db.Column(db.String(250), nullable=False)
-    last_name = db.Column(db.String(250), nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
+    name = db.Column(db.String(250), nullable=True)
+    last_name = db.Column(db.String(250), nullable=True)
+    password = db.Column(db.String(80), unique=False, nullable=True)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    tasks = db.relationship('Task', back_populates="user")
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -53,6 +54,7 @@ class Session(db.Model):
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', back_populates="tasks")
     page_name = db.Column(db.String)
     page_link = db.Column(db.String, nullable=False)
     frequency = db.Column(db.String) #not used
@@ -77,6 +79,7 @@ class Task(db.Model):
             "reward_name" : self.reward_name,
             "reward_link" : self.reward_link,
             "reward_duration" : self.reward_duration,
+            "statistics": 
         }
     
 class Test(db.Model):
