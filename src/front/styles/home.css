@@ -7,6 +7,10 @@
   
 }
 
+.navbar-nav .nav-link .sign :hover  {
+  color: #8a8a8a; 
+}
+
 .titleA{
 color: #000000;
 
