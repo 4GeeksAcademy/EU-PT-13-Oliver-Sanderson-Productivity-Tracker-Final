@@ -8,7 +8,11 @@ import TaskCard from "../component/TaskCard";
 
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
-  const [gotToken, setGotToken] = useState(store.token);
+  const [gotToken, setGotToken] = useState(store.token)
+  if (!gotToken) {
+    console.log("Redirecting to login.")
+    return <Navigate to="/login" />
+  }
 
   useEffect(() => {
     actions.fetchCurrentUserComplete();

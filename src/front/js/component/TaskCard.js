@@ -24,10 +24,10 @@ const TaskCard = () => {
     console.log("TEST TEST TEST")
   });
 
-  setTimeout(() => {
-    console.log("Delayed for 3 second.");
-    setStatsValues(store.tasks_stats)
-  }, "3000");
+  // setTimeout(() => {
+  //   console.log("Delayed for 3 second.");
+  //   setStatsValues(store.tasks_stats)
+  // }, "3000");
 
   const isTaskValid = () => {
     return taskName.trim() !== '' && taskLink.trim() !== '' && rewardName.trim() !== '' && rewardLink.trim() !== '';

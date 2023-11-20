@@ -230,19 +230,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			fetchTasksCurrentUser: async () => {
+				const store = getStore();
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "api/me/tasks" ,{
+						headers: { "Authorization": "Bearer " + store.token}
+					})
+					const data = await resp.json()
+					setStore({current_tasks : data})
+					return data;
+				}
+				catch(error) {
+					console.log("AN ERROR")
+				}
+			},
+
 			fetchCurrentUserComplete: async () => {
 				await getActions().fetchUser()
 				await getActions().fetchSessionsForUser()
-				await getActions().fetchTasksForUser()
-				let statList = []
-				await getStore().current_tasks.forEach( async (item, index) => {
-					 getStore().current_tasks[index]["stats"] = await getActions().fetchTasksStats(item.id)
-					let temp = await getActions().fetchTasksStats(item.id)
-					console.log(temp)
-					statList.push(temp)
-				})
-				await setStore({tasks_stats: statList})
-
+				await getActions().fetchTasksCurrentUser()
 			},
 
 			changeColor: (index, color) => {
