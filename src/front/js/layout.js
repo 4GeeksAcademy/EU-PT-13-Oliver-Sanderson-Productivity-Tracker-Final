@@ -15,6 +15,7 @@ import ContactUs from "./component/ContactUs";
 import Navbar from "./component/Navbar";
 import Dashboard from "./pages/dashboard";
 import PomodoroTimer from "./component/PomodoroTimer";
+import { Test } from "./pages/test";
 
 import Quotes from "./pages/quotes";
 
@@ -48,6 +49,7 @@ const Layout = () => {
             <Route element={<Quotes />} path="/Quotes" />
             <Route element={<WeatherComponent />} path="/WeatherComponent" />
             <Route element={<Signup />} path="/signup" />
+            <Route element={<Test />} path="/test" />
             <Route element={<h1>Not found!</h1>} />
 
           </Routes>

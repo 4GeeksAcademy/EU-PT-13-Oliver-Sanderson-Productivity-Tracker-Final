@@ -18,8 +18,6 @@ const Dashboard = () => {
     actions.fetchCurrentUserComplete()
   }, []);
 
-  console.log(store.current_sessions)
-
   const boxStyle = {
     maxHeight: '200px', // Set your desired fixed height
     overflow: 'auto', // Enable scrolling if content overflows

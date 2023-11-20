@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Context } from "../store/appContext";
 
 const TaskCard = () => {
   const { store, actions } = useContext(Context);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(store.current_tasks);
   const [taskName, setTaskName] = useState('');
   const [taskLink, setTaskLink] = useState('');
+  const [taskTime, setTaskTime] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [rewardName, setRewardName] = useState('');
@@ -13,6 +14,20 @@ const TaskCard = () => {
   const [rewardDuration, setRewardDuration] = useState('');
   const [customRewardDuration, setCustomRewardDuration] = useState('');
   const [error, setError] = useState('');
+  const [statsValues, setStatsValues] = useState(store.tasks_stats)
+
+  
+  useEffect(() => {
+    console.log("TEST TEST TEST")
+    console.log(store)
+    console.log(tasks)
+    console.log("TEST TEST TEST")
+  });
+
+  setTimeout(() => {
+    console.log("Delayed for 3 second.");
+    setStatsValues(store.tasks_stats)
+  }, "3000");
 
 
   const isTaskValid = () => {
@@ -21,6 +36,7 @@ const TaskCard = () => {
 
   const handleTaskSubmit = (e) => {
     e.preventDefault();
+
 
     if (!isTaskValid()) {
       setError('Please fill in all required fields.');
@@ -43,6 +59,7 @@ const TaskCard = () => {
       "page_name" : taskName,
       "page_link" : taskLink,
       "start_date" : startDate,
+      "task_time": taskTime,
       "end_date" : endDate,
       "reward_name" : rewardName,
       "reward_link" : rewardLink,
@@ -75,6 +92,7 @@ const TaskCard = () => {
   const handleDeleteAllTasks = () => {
     setTasks([]);
   };
+ 
 
   return (
     <div className="card text-start">
@@ -109,6 +127,20 @@ const TaskCard = () => {
                   placeholder="https://whereiamworking"
                   value={taskLink}
                   onChange={(e) => setTaskLink(e.target.value)}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="taskTime" className="form-label">
+                  Amount of Time to Complete (seconds)
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="taskTime"
+                  placeholder="Time in seconds"
+                  value={taskTime}
+                  onChange={(e) => setTaskTime(e.target.value)}
                 />
               </div>
 
@@ -227,6 +259,7 @@ const TaskCard = () => {
                   <th scope="col">Reward</th>
                   <th scope="col">Start Date</th>
                   <th scope="col">End Date</th>
+                  <th scope="col">Completed?</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -238,6 +271,7 @@ const TaskCard = () => {
                     <td>{task.rewardName}</td>
                     <td>{task.startDate}</td>
                     <td>{task.endDate}</td>
+                    {/* <td>{task.stats.completed ? task.stats.completed : "Loading..."}</td> */}
                     <td>
                       <button
                         className="btn btn-danger"
@@ -249,15 +283,14 @@ const TaskCard = () => {
                   </tr>
                 ))}
                 {/* Backend version */}
-                <hr/>
-                <h4>Backend data</h4>
-                {store.current_tasks.map((task) => (
+                {store.current_tasks.map((task, index) => (
                   <tr key={task.id}>
                     <th scope="row">{task.id}</th>
                     <td>{task.page_name}</td>
                     <td>{task.reward_name}</td>
                     <td>{task.start_date}</td>
                     <td>{task.end_date}</td>
+                    <td>{String(statsValues[index].completed)}</td>
                     <td>
                       <button
                         className="btn btn-danger"
