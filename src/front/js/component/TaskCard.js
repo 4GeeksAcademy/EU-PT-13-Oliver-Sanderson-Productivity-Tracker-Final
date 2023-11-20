@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Context } from "../store/appContext";
 
 const TaskCard = () => {
   const { store, actions } = useContext(Context);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(store.current_tasks);
   const [taskName, setTaskName] = useState('');
   const [taskLink, setTaskLink] = useState('');
+  const [taskTime, setTaskTime] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [rewardName, setRewardName] = useState('');
@@ -13,6 +14,20 @@ const TaskCard = () => {
   const [rewardDuration, setRewardDuration] = useState('');
   const [customRewardDuration, setCustomRewardDuration] = useState('');
   const [error, setError] = useState('');
+  const [statsValues, setStatsValues] = useState(store.tasks_stats)
+
+  
+  useEffect(() => {
+    console.log("TEST TEST TEST")
+    console.log(store)
+    console.log(tasks)
+    console.log("TEST TEST TEST")
+  });
+
+  setTimeout(() => {
+    console.log("Delayed for 3 second.");
+    setStatsValues(store.tasks_stats)
+  }, "3000");
 
   const isTaskValid = () => {
     return taskName.trim() !== '' && taskLink.trim() !== '' && rewardName.trim() !== '' && rewardLink.trim() !== '';
@@ -20,6 +35,7 @@ const TaskCard = () => {
 
   const handleTaskSubmit = (e) => {
     e.preventDefault();
+
 
     if (!isTaskValid()) {
       setError('Please fill in all required fields.');
@@ -38,15 +54,16 @@ const TaskCard = () => {
     };
 
     const taskToSend = {
-      "user_id": store.current_user.id,
-      "page_name": taskName,
-      "page_link": taskLink,
-      "start_date": startDate,
-      "end_date": endDate,
-      "reward_name": rewardName,
-      "reward_link": rewardLink,
-      "reward_duration": 300 //Currently set as 300 secs as it needs an int value
-    };
+      "user_id" : store.current_user.id,
+      "page_name" : taskName,
+      "page_link" : taskLink,
+      "start_date" : startDate,
+      "task_time": taskTime,
+      "end_date" : endDate,
+      "reward_name" : rewardName,
+      "reward_link" : rewardLink,
+      "reward_duration" : 300 //Currently set as 300 secs as it needs an int value
+    }
 
     setTasks([...tasks, newTask]);
 
@@ -73,6 +90,7 @@ const TaskCard = () => {
   const handleDeleteAllTasks = () => {
     setTasks([]);
   };
+ 
 
   return (
     <div className="text-start h-100 p-4 bg-body-tertiary border rounded-3 weather-box">
