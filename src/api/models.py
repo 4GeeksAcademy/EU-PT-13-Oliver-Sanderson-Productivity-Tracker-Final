@@ -55,6 +55,7 @@ class Task(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     page_name = db.Column(db.String)
     page_link = db.Column(db.String, nullable=False)
+    task_time = db.Column(db.Integer)
     frequency = db.Column(db.String) #not used
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
@@ -71,6 +72,7 @@ class Task(db.Model):
             "user_id": self.user_id,
             "page_name": self.page_name,
             "page_link": self.page_link,
+            "task_time": self.task_time,
             # "frequency": self.frequency,
             "start_date": self.start_date,
             "end_date": self.end_date,
@@ -103,14 +105,29 @@ class Test(db.Model):
 class StatisticTaskGenerator:
     def __init__(self, task_id):
         the_task = Task.query.filter_by(id = task_id).first()
-        print(the_task.page_link)
-        sessions = Session.query.filter_by(url = the_task.page_link).all()
-        print(sessions[0].time_spent_secs)
-        # Need to check sessions match current user then total 'time_spent_secs' for them all to see if the task is complete.
 
+    def calculate_statistic(self, task_id):
+        the_task = Task.query.filter_by(id = task_id).first()
+        # sessions_for_task = Session.query.filter_by(Session.url.contains(the_task.page_link), user_id = the_task.user_id ).all()
+        sessions_for_task = Session.query.filter_by(user_id = the_task.user_id, url = the_task.page_link).all()
+        sessions_in_date = []
 
-    def calculate_statistic(self):
+        for x in sessions_for_task:
+            if ((x.date > the_task.start_date) & (x.date < the_task.end_date)):
+                sessions_in_date.append(x)
+
+        print(sessions_in_date)
+        total_secs = 0
+
+        for x in sessions_in_date:
+            total_secs = total_secs + x.time_spent_secs
+
+        if the_task.task_time == None:
+            the_task.task_time = 0
+        completed = total_secs >= the_task.task_time
+
         return {
-            "completed": "YESorNO",
+            "completed": completed,
+            "total_time": total_secs
         }
         pass

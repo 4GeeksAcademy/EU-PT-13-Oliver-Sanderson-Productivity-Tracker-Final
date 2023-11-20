@@ -315,6 +315,7 @@ def handle_tasks():
         #     "page_name" : "The page",
         #     "page_link" : "URL.com",
         #     "frequency" : "daily",
+        #     "task_time" : 300,
         #     "start_date" : "1000-01-01 00:00:00",
         #     "end_date" : "9999-12-31 23:59:59",
         #     "reward_name" : "Play Game",
@@ -324,11 +325,12 @@ def handle_tasks():
 
         request_body = request.get_json()
         # Check request_body has all required fields
-        if ('user_id' in request_body and 'page_name' in request_body and 'page_link' in request_body and 'start_date' in request_body and 'end_date' in request_body and 'reward_duration' in request_body and 'reward_name' in request_body and 'reward_link' in request_body):
+        if ('user_id' in request_body and 'page_name' in request_body and 'page_link' in request_body and 'task_time' in request_body and 'start_date' in request_body and 'end_date' in request_body and 'reward_duration' in request_body and 'reward_name' in request_body and 'reward_link' in request_body):
             new_task = Task()
             new_task.user_id = request_body["user_id"]
             new_task.page_name = request_body["page_name"]
             new_task.page_link = request_body["page_link"]
+            new_task.task_time = request_body["task_time"]
             new_task.frequency = "Once"
             new_task.start_date = request_body["start_date"]
             new_task.end_date = request_body["end_date"]
@@ -356,6 +358,7 @@ def handle_tasks():
             temp["user_id"] = (result.user_id)
             temp["page_name"] = (result.page_name)
             temp["page_link"] = (result.page_link)
+            temp["task_time"] = (result.task_time)
             # temp["frequency"] = (result.frequency)
             temp["start_date"] = (result.start_date)
             temp["end_date"] = (result.end_date)
@@ -369,7 +372,7 @@ def handle_tasks():
 @api.route('/tasks/<int:task_id>/statistics', methods=['GET'])
 def calculate_task_statistics(task_id):
     print(task_id)
-    statistics =  StatisticTaskGenerator(task_id).calculate_statistic()
+    statistics =  StatisticTaskGenerator(task_id).calculate_statistic(task_id)
     return jsonify(statistics), 200
 
 
