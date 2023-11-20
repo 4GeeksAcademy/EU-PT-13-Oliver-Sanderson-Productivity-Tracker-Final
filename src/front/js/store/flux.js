@@ -101,7 +101,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			fetchSignUp: (fName, lName, email, password) => {
-				console.log("SIGN UP CALLED")
 				fetch(process.env.BACKEND_URL + "api/signup", {
 					method: "POST",
 					headers: {"Content-Type": "application/json"},

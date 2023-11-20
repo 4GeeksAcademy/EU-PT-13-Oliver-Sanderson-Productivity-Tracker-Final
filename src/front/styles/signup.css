@@ -7,12 +7,10 @@
   background-color: #409f40
 }
 
-form {
+.form-sign-up {
   background-color: #f8f9fa;
   padding: 20px;
   border-radius: 5px;
-  width: 50%;
-  margin-top: 300px;
 }
 
 .form-group {
@@ -41,7 +39,8 @@ input[type="password"] {
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 10px; /* Add a right margin for the gap */
+  margin-right: 10px;
+  /* Add a right margin for the gap */
 }
 
 .signup-button:hover,

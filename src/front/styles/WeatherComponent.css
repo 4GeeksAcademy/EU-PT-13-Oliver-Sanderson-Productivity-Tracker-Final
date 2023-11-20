@@ -1,10 +1,10 @@
 .weather-box {
-    background-color: #6e7686;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 50%; /* Adjust the width as per your requirement */
+    width: auto; /* Adjust the width as per your requirement */
     margin: 0 auto; /* Center the box horizontally */
   }
   .weather-box input {
