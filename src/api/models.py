@@ -80,7 +80,8 @@ class Task(db.Model):
             "end_date": self.end_date,
             "reward_name" : self.reward_name,
             "reward_link" : self.reward_link,
-            "reward_duration" : self.reward_duration
+            "reward_duration" : self.reward_duration,
+            "statistics": StatisticTaskGenerator().calculate_statistic(self)
         }
     
 class Test(db.Model):
@@ -105,12 +106,9 @@ class Test(db.Model):
 
 
 class StatisticTaskGenerator:
-    def __init__(self, task_id):
-        the_task = Task.query.filter_by(id = task_id).first()
 
-    def calculate_statistic(self, task_id):
-        the_task = Task.query.filter_by(id = task_id).first()
-        # sessions_for_task = Session.query.filter_by(Session.url.contains(the_task.page_link), user_id = the_task.user_id ).all()
+    def calculate_statistic(self, task):
+        the_task = task
         sessions_for_task = Session.query.filter_by(user_id = the_task.user_id, url = the_task.page_link).all()
         sessions_in_date = []
 
@@ -132,4 +130,3 @@ class StatisticTaskGenerator:
             "completed": completed,
             "total_time": total_secs
         }
-        pass
