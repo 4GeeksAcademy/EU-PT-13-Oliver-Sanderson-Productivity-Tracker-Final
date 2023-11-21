@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Context } from "../store/appContext";
 
 const TaskCard = () => {
   const { store, actions } = useContext(Context);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(store.current_tasks);
   const [taskName, setTaskName] = useState('');
   const [taskLink, setTaskLink] = useState('');
+  const [taskTime, setTaskTime] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [rewardName, setRewardName] = useState('');
@@ -14,6 +15,10 @@ const TaskCard = () => {
   const [customRewardDuration, setCustomRewardDuration] = useState('');
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    console.log(store)
+  });
+
   const isTaskValid = () => {
     return taskName.trim() !== '' && taskLink.trim() !== '' && rewardName.trim() !== '' && rewardLink.trim() !== '';
   };
@@ -21,37 +26,28 @@ const TaskCard = () => {
   const handleTaskSubmit = (e) => {
     e.preventDefault();
 
+
     if (!isTaskValid()) {
       setError('Please fill in all required fields.');
       return;
     }
 
-    const newTask = {
-      id: tasks.length + 1,
-      taskName,
-      taskLink,
-      startDate,
-      endDate,
-      rewardName,
-      rewardLink,
-      rewardDuration: rewardDuration === 'custom' ? customRewardDuration : rewardDuration,
-    };
-
     const taskToSend = {
-      "user_id": store.current_user.id,
-      "page_name": taskName,
-      "page_link": taskLink,
-      "start_date": startDate,
-      "end_date": endDate,
-      "reward_name": rewardName,
-      "reward_link": rewardLink,
-      "reward_duration": 300 //Currently set as 300 secs as it needs an int value
-    };
+      "user_id" : store.current_user.id,
+      "page_name" : taskName,
+      "page_link" : taskLink,
+      "start_date" : startDate,
+      "task_time": taskTime,
+      "end_date" : endDate,
+      "reward_name" : rewardName,
+      "reward_link" : rewardLink,
+      "reward_duration" : 300 //Currently set as 300 secs as it needs an int value
+    }
 
-    setTasks([...tasks, newTask]);
 
     // Sending task to backend
     actions.fetchSendTask(taskToSend);
+    console.log(actions.fetchTasksCurrentUser()) // Important as forces reload
 
     // Clear form fields after submission
     setTaskName('');
@@ -65,6 +61,11 @@ const TaskCard = () => {
     setError('');
   };
 
+  const handelDeleteBackend = (taskId) => {
+    actions.fetchDeleteTask(taskId)
+    console.log(actions.fetchTasksCurrentUser()) // Important as forces reload
+  }
+
   const handleDeleteTask = (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(updatedTasks);
@@ -73,6 +74,7 @@ const TaskCard = () => {
   const handleDeleteAllTasks = () => {
     setTasks([]);
   };
+ 
 
   return (
     <div className="text-start h-100 p-4 bg-body-tertiary border rounded-3 weather-box">
@@ -111,6 +113,22 @@ const TaskCard = () => {
                         placeholder="https://whereiamworking"
                         value={taskLink}
                         onChange={(e) => setTaskLink(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                  <div className="col-md-12 mb-1">
+                      <label htmlFor="taskTime" className="form-label">
+                        Time To Complete Task (Seconds)
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control"
+                        id="taskTime"
+                        placeholder="Time in seconds"
+                        value={taskTime}
+                        onChange={(e) => setTaskTime(e.target.value)}
                       />
                     </div>
                   </div>
@@ -228,46 +246,28 @@ const TaskCard = () => {
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Task</th>
                 <th scope="col">Reward</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
+                <th scope="col">Completed?</th>
+                <th scope="col">Time remaining</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              {tasks.map((task) => (
+              {store.current_tasks.map((task, index) => (
                 <tr key={task.id}>
-                  <th scope="row">{task.id}</th>
-                  <td>{task.taskName}</td>
-                  <td>{task.rewardName}</td>
-                  <td>{task.startDate}</td>
-                  <td>{task.endDate}</td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => handleDeleteTask(task.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {/* Backend version */}
-              <hr />
-              <h4>Backend data</h4>
-              {store.current_tasks.map((task) => (
-                <tr key={task.id}>
-                  <th scope="row">{task.id}</th>
                   <td>{task.page_name}</td>
                   <td>{task.reward_name}</td>
-                  <td>{task.start_date}</td>
-                  <td>{task.end_date}</td>
+                  <td>{(task.start_date).slice(0, 16)}</td>
+                  <td>{(task.end_date).slice(0, 16)}</td>
+                  <td style={store.current_tasks[index].statistics.completed ? { color:'green'} : {color : 'red'}}>{store.current_tasks[index].statistics.completed ? "Completed": "Incomplete"}</td>
+                  <td style={store.current_tasks[index].statistics.completed ? { color:'green'} : {color : 'red'} }>{store.current_tasks[index].task_time - store.current_tasks[index].statistics.total_time}</td>
                   <td>
                     <button
                       className="btn btn-danger"
-                      onClick={() => actions.fetchDeleteTask(task.id)}
+                      onClick={() => handelDeleteBackend(task.id)}
                     >
                       Delete
                     </button>

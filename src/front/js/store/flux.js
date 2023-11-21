@@ -5,7 +5,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			current_user: {},
 			current_sessions: [],
 			current_tasks: [],
+			tasks_stats: [{completed: "Loading..."}, {completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},{completed: "Loading..."},],
 			message: null,
+			test: "BaconAndEggs",
 			demo: [
 				{
 					title: "FIRST",
@@ -57,7 +59,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							})
 					})
 					const data = await resp.json()
-					console.log(data)
 					return data;
 				}
 				catch(error) {
@@ -69,8 +70,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchSendTask: async (taskObject) => {
 				const store = getStore();
 
-				console.log(taskObject)
-				console.log(store.token)
 
 				try{
 					const resp = await fetch(process.env.BACKEND_URL + "api/tasks", {
@@ -81,6 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								user_id : taskObject["user_id"],
 								page_name : taskObject["page_name"],
 								page_link : taskObject["page_link"],
+								task_time : taskObject["task_time"],
 								frequency : taskObject["frequency"],
 								start_date : taskObject["start_date"],
 								end_date : taskObject["end_date"],
@@ -92,7 +92,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					})
 					const data = await resp.json()
-					console.log(data)
 					return data;
 				}
 				catch(error) {
@@ -144,7 +143,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await resp.json()
 					setStore({ token: data.access_token })
 					setStore({ current_user: {"email": email} })
-					console.log(getStore())
 					return data;
 				}
 				catch(error) {
@@ -218,11 +216,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			fetchTasksStats: async (task_id) => {
+				const store = getStore();
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "api/tasks/" + task_id + "/statistics",{
+						headers: { "Authorization": "Bearer " + store.token}
+					})
+					const data = await resp.json()
+					return data;
+				}
+				catch(error) {
+					console.log("AN ERROR")
+				}
+			},
+
+			fetchTasksCurrentUser: async () => {
+				const store = getStore();
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "api/me/tasks" ,{
+						headers: { "Authorization": "Bearer " + store.token}
+					})
+					const data = await resp.json()
+					setStore({current_tasks : data})
+					return data;
+				}
+				catch(error) {
+					console.log("AN ERROR")
+				}
+			},
+
 			fetchCurrentUserComplete: async () => {
 				await getActions().fetchUser()
 				await getActions().fetchSessionsForUser()
-				await getActions().fetchTasksForUser()
-				console.log(getStore())
+				await getActions().fetchTasksCurrentUser()
 			},
 
 			changeColor: (index, color) => {
