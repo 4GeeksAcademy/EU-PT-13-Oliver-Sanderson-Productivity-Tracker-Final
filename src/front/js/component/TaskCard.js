@@ -32,17 +32,6 @@ const TaskCard = () => {
       return;
     }
 
-    const newTask = {
-      id: tasks.length + 1,
-      taskName,
-      taskLink,
-      startDate,
-      endDate,
-      rewardName,
-      rewardLink,
-      rewardDuration: rewardDuration === 'custom' ? customRewardDuration : rewardDuration,
-    };
-
     const taskToSend = {
       "user_id" : store.current_user.id,
       "page_name" : taskName,
@@ -55,10 +44,10 @@ const TaskCard = () => {
       "reward_duration" : 300 //Currently set as 300 secs as it needs an int value
     }
 
-    setTasks([...tasks, newTask]);
 
     // Sending task to backend
     actions.fetchSendTask(taskToSend);
+    console.log(actions.fetchTasksCurrentUser()) // Important as forces reload
 
     // Clear form fields after submission
     setTaskName('');
@@ -71,6 +60,11 @@ const TaskCard = () => {
     setCustomRewardDuration('');
     setError('');
   };
+
+  const handelDeleteBackend = (taskId) => {
+    actions.fetchDeleteTask(taskId)
+    console.log(actions.fetchTasksCurrentUser()) // Important as forces reload
+  }
 
   const handleDeleteTask = (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
@@ -262,35 +256,18 @@ const TaskCard = () => {
               </tr>
             </thead>
             <tbody>
-              {tasks.map((task) => (
-                <tr key={task.id}>
-                  <td>{task.taskName}</td>
-                  <td>{task.rewardName}</td>
-                  <td>{task.startDate}</td>
-                  <td>{task.endDate}</td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => handleDeleteTask(task.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-
               {store.current_tasks.map((task, index) => (
                 <tr key={task.id}>
                   <td>{task.page_name}</td>
                   <td>{task.reward_name}</td>
-                  <td>{task.start_date}</td>
-                  <td>{task.end_date}</td>
-                  <td>{store.current_tasks[index].statistics.completed ? "Completed": "Incomplete"}</td>
-                  <td>{store.current_tasks[index].task_time - store.current_tasks[index].statistics.total_time}</td>
+                  <td>{(task.start_date).slice(0, 16)}</td>
+                  <td>{(task.end_date).slice(0, 16)}</td>
+                  <td style={store.current_tasks[index].statistics.completed ? { color:'green'} : {color : 'red'}}>{store.current_tasks[index].statistics.completed ? "Completed": "Incomplete"}</td>
+                  <td style={store.current_tasks[index].statistics.completed ? { color:'green'} : {color : 'red'} }>{store.current_tasks[index].task_time - store.current_tasks[index].statistics.total_time}</td>
                   <td>
                     <button
                       className="btn btn-danger"
-                      onClick={() => actions.fetchDeleteTask(task.id)}
+                      onClick={() => handelDeleteBackend(task.id)}
                     >
                       Delete
                     </button>
