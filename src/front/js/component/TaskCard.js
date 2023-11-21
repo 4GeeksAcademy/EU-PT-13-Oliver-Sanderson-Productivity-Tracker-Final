@@ -14,20 +14,10 @@ const TaskCard = () => {
   const [rewardDuration, setRewardDuration] = useState('');
   const [customRewardDuration, setCustomRewardDuration] = useState('');
   const [error, setError] = useState('');
-  const [statsValues, setStatsValues] = useState(store.tasks_stats)
 
-  
   useEffect(() => {
-    console.log("TEST TEST TEST")
     console.log(store)
-    console.log(tasks)
-    console.log("TEST TEST TEST")
   });
-
-  // setTimeout(() => {
-  //   console.log("Delayed for 3 second.");
-  //   setStatsValues(store.tasks_stats)
-  // }, "3000");
 
   const isTaskValid = () => {
     return taskName.trim() !== '' && taskLink.trim() !== '' && rewardName.trim() !== '' && rewardLink.trim() !== '';
@@ -129,6 +119,22 @@ const TaskCard = () => {
                         placeholder="https://whereiamworking"
                         value={taskLink}
                         onChange={(e) => setTaskLink(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                  <div className="col-md-12 mb-1">
+                      <label htmlFor="taskTime" className="form-label">
+                        Time To Complete Task (Seconds)
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control"
+                        id="taskTime"
+                        placeholder="Time in seconds"
+                        value={taskTime}
+                        onChange={(e) => setTaskTime(e.target.value)}
                       />
                     </div>
                   </div>
@@ -246,18 +252,18 @@ const TaskCard = () => {
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Task</th>
                 <th scope="col">Reward</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
+                <th scope="col">Completed?</th>
+                <th scope="col">Time remaining</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {tasks.map((task) => (
                 <tr key={task.id}>
-                  <th scope="row">{task.id}</th>
                   <td>{task.taskName}</td>
                   <td>{task.rewardName}</td>
                   <td>{task.startDate}</td>
@@ -272,16 +278,15 @@ const TaskCard = () => {
                   </td>
                 </tr>
               ))}
-              {/* Backend version */}
-              <hr />
-              <h4>Backend data</h4>
-              {store.current_tasks.map((task) => (
+
+              {store.current_tasks.map((task, index) => (
                 <tr key={task.id}>
-                  <th scope="row">{task.id}</th>
                   <td>{task.page_name}</td>
                   <td>{task.reward_name}</td>
                   <td>{task.start_date}</td>
                   <td>{task.end_date}</td>
+                  <td>{store.current_tasks[index].statistics.completed ? "Completed": "Incomplete"}</td>
+                  <td>{store.current_tasks[index].task_time - store.current_tasks[index].statistics.total_time}</td>
                   <td>
                     <button
                       className="btn btn-danger"
