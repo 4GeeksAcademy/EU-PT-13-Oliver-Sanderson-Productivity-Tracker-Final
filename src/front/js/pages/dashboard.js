@@ -8,7 +8,11 @@ import TaskCard from "../component/TaskCard";
 
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
-  const [gotToken, setGotToken] = useState(store.token);
+  const [gotToken, setGotToken] = useState(store.token)
+  if (!gotToken) {
+    console.log("Redirecting to login.")
+    return <Navigate to="/login" />
+  }
 
   useEffect(() => {
     actions.fetchCurrentUserComplete();
@@ -26,7 +30,7 @@ const Dashboard = () => {
       <div className="container">
         <div className="col-md-12 justify-content-center">
           <h1 className="pt-5 mb-5 display-6 fw-bold">
-            Welcome {store.current_user["name"]} USER, check out your productivity!
+            Welcome {store.current_user["name"] ? store.current_user["name"] : "User"}, check out your productivity!
           </h1>
         </div>
 
@@ -73,7 +77,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
