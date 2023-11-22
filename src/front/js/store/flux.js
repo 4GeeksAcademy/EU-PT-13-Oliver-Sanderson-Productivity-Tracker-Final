@@ -107,13 +107,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}).then((recieved) => {
 					// TODO check if ok
 					if(recieved.ok) {
-						console.log("User created!")
+						alert("User created!")
 					}
 					return recieved.json()
 				  })
 				  .then((data) => {
-					return data
-				  }).catch((error) => console.log(error))
+					return true
+				  }).catch((error) => {alert("Problem creating user. Error: " + error); return false})
 			},
 			fetchContactUs: ( email, message) => {
 				console.log("CONTACT US CALLED")
