@@ -64,7 +64,7 @@ def handle_signup():
             db.session.commit()
 
             response_body = "User created"
-            return jsonify(response_body), 400
+            return jsonify(response_body), 200
 
         else: 
             response_body = "Missing body content"
@@ -412,3 +412,26 @@ def handle_tests():
 
     return jsonify(response_body), 200
 
+@api.route('/contactus', methods=['POST'])
+def handle_contactus():
+        
+      
+
+        request_body = request.get_json() 
+        # Check request_body has all required fields
+        if ('email' in request_body and 'message' in request_body ):
+            new_enquiries = Enquiries()
+            new_enquiries.email = request_body["email"]
+            new_enquiries.message = request_body["message"]
+            
+            new_enquiries.is_active = True
+
+            db.session.add(new_enquiries)
+            db.session.commit()
+
+            response_body = "Enquiry Submitted"
+            return jsonify(response_body), 400
+
+        else: 
+            response_body = "Missing body content"
+            return jsonify(response_body), 400

@@ -1,11 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Context } from '../store/appContext';
-import '../../styles/signup.css'; 
-
-import "../../styles/home.css";
+import React, { useState, useEffect, useContext } from 'react';
+import { Context } from "../store/appContext";
+import '../../styles/signup.css'; // Import the CSS file for styling
+import Alert from '../component/Alert';
 
 const Signup = () => {
-  const { store, actions } = useContext(Context);
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -13,6 +11,8 @@ const Signup = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+
+  const { store, actions } = useContext(Context);
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -24,34 +24,22 @@ const Signup = () => {
       return;
     }
 
-    // Perform signup logic with the form data
-    // For example, you can send the data to a server or perform validation
-    actions.fetchSignUp(firstName, lastName, email, password)
-
-    // Reset the form fields
-    setEmail('');
-    setFirstName('');
-    setLastName('');
-    setPassword('');
-
-    setSuccessMessage('Account created successfully.');
-    setErrorMessage('');
-    setShowPopup(true);
-  };
-
-  useEffect(() => {
-    if (showPopup) {
-      setTimeout(() => {
-        setShowPopup(false);
-      }, 2000); // Hide the popup after 2 seconds
+    if (actions.fetchSignUp(firstName, lastName, email, password)) {
+      setEmail('');
+      setFirstName('');
+      setLastName('');
+      setPassword('');
+      setShowPopup(true);
+    } else {
+      alert('Something went wrong, please check your values')
     }
-  }, [showPopup]);
+  };
 
   return (
     <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <form className="bg-light form-sign-up" style={{ padding: '20px', borderRadius: '1px', width: '60%' }} onSubmit={handleSignup}>
+      <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '60%' }} onSubmit={handleSignup}>
         <h2>Signup Form</h2>
-        {showPopup && <div className="popup">{successMessage}</div>}
+        {showPopup && <Alert messageType="success" message="The use was created :)" />}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <div className="form-group">
           <label>Email:</label>
@@ -89,11 +77,11 @@ const Signup = () => {
             required
           />
         </div>
-        
+
         <button type="submit" className="signup-button">Submit</button>
-      
-        <a href="/login" class="login-button">Sign In</a>
-       
+
+        <a href="/login" className="login-button">Sign In</a>
+
       </form>
     </div>
   );
