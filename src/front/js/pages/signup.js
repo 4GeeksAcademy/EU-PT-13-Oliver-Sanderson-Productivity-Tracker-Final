@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import '../../styles/signup.css'; // Import the CSS file for styling
+import Alert from '../component/Alert';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -24,12 +25,11 @@ const Signup = () => {
     }
 
     if (actions.fetchSignUp(firstName, lastName, email, password)) {
-      console.log("HELLO HELLO!");
-      alert('Account created successfully, please sign in :)');
       setEmail('');
       setFirstName('');
       setLastName('');
       setPassword('');
+      setShowPopup(true);
     } else {
       alert('Something went wrong, please check your values')
     }
@@ -39,7 +39,7 @@ const Signup = () => {
     <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '60%' }} onSubmit={handleSignup}>
         <h2>Signup Form</h2>
-        {showPopup && <div className="popup">{successMessage}</div>}
+        {showPopup && <Alert messageType="success" message="The use was created :)" />}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <div className="form-group">
           <label>Email:</label>
