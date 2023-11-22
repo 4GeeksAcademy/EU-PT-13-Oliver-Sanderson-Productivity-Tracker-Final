@@ -417,7 +417,7 @@ def handle_contactus():
         
       
 
-        request_body = request.get_json()git 
+        request_body = request.get_json() 
         # Check request_body has all required fields
         if ('email' in request_body and 'message' in request_body ):
             new_enquiries = Enquiries()
