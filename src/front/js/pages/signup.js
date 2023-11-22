@@ -34,9 +34,6 @@ const Signup = () => {
     setLastName('');
     setPassword('');
 
-    setSuccessMessage('Account created successfully.');
-    setErrorMessage('');
-    setShowPopup(true);
   };
 
   useEffect(() => {

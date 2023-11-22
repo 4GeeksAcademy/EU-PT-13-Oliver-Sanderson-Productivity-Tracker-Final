@@ -64,7 +64,7 @@ def handle_signup():
             db.session.commit()
 
             response_body = "User created"
-            return jsonify(response_body), 400
+            return jsonify(response_body), 200
 
         else: 
             response_body = "Missing body content"
