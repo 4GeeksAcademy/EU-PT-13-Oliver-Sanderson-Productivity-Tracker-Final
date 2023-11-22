@@ -6,6 +6,7 @@ import "../../styles/home.css";
 import "../../styles/style.css"
 import Description from "../component/Description";
 import Portfolio from "../component/Portfolio";
+import Download from "../component/Download";
 
 
 
@@ -19,6 +20,7 @@ export const Home = () => {
 
 			<Description></Description>
 			<Portfolio></Portfolio>
+			<Download></Download>
 			
 
 
