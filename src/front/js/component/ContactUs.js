@@ -1,10 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
+import { Context } from '../store/appContext';
 
 const ContactUs = () => {
   const formRef = useRef(null);
+  const { store, actions } = useContext(Context);
 
   const handleFormSubmit = (event) => {
     event.preventDefault(); // Prevent form submission
+    actions.fetchContactUs("itsme@gmail.com", "hello")
+
 
     // Access form elements and reset their values
     const form = formRef.current;
