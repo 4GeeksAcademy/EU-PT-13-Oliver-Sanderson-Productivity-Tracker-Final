@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Context } from "../store/appContext";
 import '../../styles/signup.css'; // Import the CSS file for styling
 
 const Signup = () => {
@@ -10,6 +11,8 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
+  const { store, actions } = useContext(Context);
+
   const handleSignup = (e) => {
     e.preventDefault();
 
@@ -20,27 +23,17 @@ const Signup = () => {
       return;
     }
 
-    // Perform signup logic with the form data
-    // For example, you can send the data to a server or perform validation
-
-    // Reset the form fields
-    setEmail('');
-    setFirstName('');
-    setLastName('');
-    setPassword('');
-
-    setSuccessMessage('Account created successfully.');
-    setErrorMessage('');
-    setShowPopup(true);
-  };
-
-  useEffect(() => {
-    if (showPopup) {
-      setTimeout(() => {
-        setShowPopup(false);
-      }, 2000); // Hide the popup after 2 seconds
+    if (actions.fetchSignUp(firstName, lastName, email, password)) {
+      console.log("HELLO HELLO!");
+      alert('Account created successfully, please sign in :)');
+      setEmail('');
+      setFirstName('');
+      setLastName('');
+      setPassword('');
+    } else {
+      alert('Something went wrong, please check your values')
     }
-  }, [showPopup]);
+  };
 
   return (
     <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -84,11 +77,11 @@ const Signup = () => {
             required
           />
         </div>
-        
+
         <button type="submit" className="signup-button">Submit</button>
-      
-        <a href="/login" class="login-button">Sign In</a>
-       
+
+        <a href="/login" className="login-button">Sign In</a>
+
       </form>
     </div>
   );
