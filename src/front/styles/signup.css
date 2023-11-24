@@ -1,17 +1,25 @@
 .signup-container {
-  height: 35vh;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 30px;
+  
 }
 
 .form-placeholder {
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 1px;
-  width: 80%;
-  margin-top: 300px;
+  color: #000000;
+  border-radius: 15px;
+  padding: 30px;
+  padding-right: 100px;
+  padding-left: 100px;
+  width: 700px;
+  background-color: #FFFFFF;
+;
+  margin-top: 50px;
+
+  /* Add relative positioning */
+  position: relative;
+  z-index: 2; /* Ensure the signup form is above the content behind it */
 }
 
 .form-group {
@@ -52,3 +60,4 @@ input[type="password"] {
   background-color: #ced4da;
   cursor: not-allowed;
 }
+

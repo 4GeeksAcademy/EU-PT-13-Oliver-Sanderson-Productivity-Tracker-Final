@@ -9,7 +9,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
-import Footer from "./component/Footer";
+import Footer1 from "./component/Footer1";
 import Login from "./pages/login";
 import ContactUs from "./component/ContactUs";
 import Navbar from "./component/Navbar";
@@ -42,19 +42,21 @@ const Layout = () => {
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Login />} path="/login" />
+            <Route element={<Signup />} path="/signup" />
             <Route element={<Dashboard />} path="/dashboard" />
             <Route element={<ContactUs />} path="/ContactUs" />
             <Route element={<PomodoroTimer />} path="/PomodoroTimer" />
             <Route element={<TaskCard/>} path="/TaskCard" />
             <Route element={<Quotes />} path="/Quotes" />
             <Route element={<WeatherComponent />} path="/WeatherComponent" />
-            <Route element={<Signup />} path="/signup" />
             <Route element={<Test />} path="/test" />
             <Route element={<h1>Not found!</h1>} />
 
           </Routes>
-        </ScrollToTop>
+        </ScrollToTop> 
+        <Footer1/>
       </BrowserRouter>
+     
     
     </div>
   );

@@ -33,7 +33,7 @@ const WeatherComponent = () => {
   }, [search]);
 
   return (
-    <div className=" h-100 p-5 bg-body-tertiary border rounded-3 custom-container weather-box">
+    <div className=" h-100 p-5  border rounded-3 custom-container">
       <h2 className="box-heading">Weather Information</h2>
       <div>
         <input
@@ -50,7 +50,7 @@ const WeatherComponent = () => {
           <p>Condition: {weatherData.current.condition.text}</p>
         </div>
       ) : (
-        <p>Loading weather data...</p>
+        <br/>
       )}
     </div>
   );

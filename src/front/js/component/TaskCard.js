@@ -1,9 +1,9 @@
+
 import React, { useState, useContext, useEffect } from 'react';
 import { Context } from "../store/appContext";
 
 const TaskCard = () => {
   const { store, actions } = useContext(Context);
-  const [tasks, setTasks] = useState(store.current_tasks);
   const [taskName, setTaskName] = useState('');
   const [taskLink, setTaskLink] = useState('');
   const [taskTime, setTaskTime] = useState('');
@@ -26,7 +26,6 @@ const TaskCard = () => {
   const handleTaskSubmit = (e) => {
     e.preventDefault();
 
-
     if (!isTaskValid()) {
       setError('Please fill in all required fields.');
       return;
@@ -37,13 +36,12 @@ const TaskCard = () => {
       "page_name" : taskName,
       "page_link" : taskLink,
       "start_date" : startDate,
-      "task_time": taskTime,
+      "task_time": taskTime === 'custom' ? customRewardDuration : taskTime,
       "end_date" : endDate,
       "reward_name" : rewardName,
       "reward_link" : rewardLink,
-      "reward_duration" : 300 //Currently set as 300 secs as it needs an int value
+      "reward_duration" : rewardDuration === 'custom' ? customRewardDuration : rewardDuration
     }
-
 
     // Sending task to backend
     actions.fetchSendTask(taskToSend);
@@ -58,6 +56,7 @@ const TaskCard = () => {
     setRewardLink('');
     setRewardDuration('');
     setCustomRewardDuration('');
+    setTaskTime('');  // Reset task duration
     setError('');
   };
 
@@ -67,25 +66,22 @@ const TaskCard = () => {
   }
 
   const handleDeleteTask = (taskId) => {
-    const updatedTasks = tasks.filter((task) => task.id !== taskId);
-    setTasks(updatedTasks);
+    const updatedTasks = store.current_tasks.filter((task) => task.id !== taskId);
+    actions.setStore({ current_tasks: updatedTasks });
   };
 
   const handleDeleteAllTasks = () => {
-    setTasks([]);
+    actions.setStore({ current_tasks: [] });
   };
- 
 
   return (
-    <div className="text-start h-100 p-4 bg-body-tertiary border rounded-3 weather-box">
+    <div className="text-start h-100 p-4 bg-body-tertiary border rounded-3 weather-box mb-3">
       <h4 className="display-fw pb-4">Add Task and Reward</h4>
       {error && <div className="alert alert-danger">{error}</div>}
       <div className="row">
-
         <div className="col-md-6 ">
           <form onSubmit={handleTaskSubmit}>
             <div className="row align-items-md-stretchx">
-
               <div className="col-md-6">
                 <div className="h-100 p-5 bg-body-tertiary border rounded-3 custom-container weather-box ">
                   <div className="row">
@@ -117,19 +113,21 @@ const TaskCard = () => {
                     </div>
                   </div>
                   <div>
-                  <div className="col-md-12 mb-1">
+                    <div className="col-md-12 mb-1">
                       <label htmlFor="taskTime" className="form-label">
-                        Time To Complete Task (Seconds)
+                        Duration 
                       </label>
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control"
+                      <select
+                        className="form-select"
                         id="taskTime"
-                        placeholder="Time in seconds"
                         value={taskTime}
                         onChange={(e) => setTaskTime(e.target.value)}
-                      />
+                      >
+                        <option value="3600s">1 hour</option>
+                        <option value="7200s">2 hours</option>
+                        <option value="4400s">4 hours</option>
+                        <option value="custom">Custom</option>
+                      </select>
                     </div>
                   </div>
                   <div className="d-flex">
@@ -161,7 +159,9 @@ const TaskCard = () => {
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="h-100 p-5 bg-body-tertiary border rounded-3 custom-container weather-box">
+                <div className="h-100 p-5 bg-body-tertiary border
+
+ rounded-3 custom-container weather-box">
                   <div className="row">
                     <div className="col-md-6 mb-1">
                       <label htmlFor="rewardName" className="form-label">
@@ -223,22 +223,20 @@ const TaskCard = () => {
                   )}
                 </div>
               </div>
-
-
             </div>
+            <br/>
             <button
               type="submit"
-              className=" btn btn-secondary d-flex justify-content"
+              className="mx-auto btn btn-secondary d-flex justify-content"
               disabled={!isTaskValid()}
             >
               Done
             </button>
           </form>
         </div>
-
         <div className="col-md-6">
           <h5 className="card-title">Task List </h5>
-          {tasks.length > 0 && (
+          {store.current_tasks.length > 0 && (
             <button className="btn btn-danger mb-3" onClick={handleDeleteAllTasks}>
               Delete All Tasks
             </button>
@@ -262,12 +260,17 @@ const TaskCard = () => {
                   <td>{task.reward_name}</td>
                   <td>{(task.start_date).slice(0, 16)}</td>
                   <td>{(task.end_date).slice(0, 16)}</td>
-                  <td style={store.current_tasks[index].statistics.completed ? { color:'green'} : {color : 'red'}}>{store.current_tasks[index].statistics.completed ? "Completed": "Incomplete"}</td>
-                  <td style={store.current_tasks[index].statistics.completed ? { color:'green'} : {color : 'red'} }>{store.current_tasks[index].task_time - store.current_tasks[index].statistics.total_time}</td>
+                  <td style={store.current_tasks[index].statistics.completed ? { color: 'green' } : { color: 'red' }}>
+                    {store.current_tasks[index].statistics.completed ? "Completed" : "Incomplete"}
+                  </td>
+                  <td style={store.current_tasks[index].statistics.completed ? { color: 'green' } : { color: 'red' }}>
+                    {/* Update the logic to handle the task_time input as a string */}
+                    {store.current_tasks[index].task_time - store.current_tasks[index].statistics.total_time}
+                  </td>
                   <td>
                     <button
                       className="btn btn-danger"
-                      onClick={() => handelDeleteBackend(task.id)}
+                      onClick={() => handleDeleteTask(task.id)}
                     >
                       Delete
                     </button>

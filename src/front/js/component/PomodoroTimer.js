@@ -56,22 +56,22 @@ const PomodoroTimer = () => {
   };
 
   return (
-    <div className="h-100 p-5 bg-body-tertiary border rounded-3 custom-container weather-box" >
+    <div className="h-100 p-5 bg-body-tertiary border rounded-3 custom-container " >
       <div className="text-center">
-        <h5 className="box-heading">Pomodoro Timer</h5>
+        <h5 >Pomodoro Timer</h5>
         <p className="card-text display-4">
           {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
         </p>
         {backgroundImage && <img src={backgroundImage} alt="Art Painting" className="img-fluid mb-3 rounded" />}
         <div className="btn-group" role="group" aria-label="Timer Controls">
           <button onClick={() => startTimer(25)} className="btn btn-secondary" style={{ opacity: 0.8 }}>
-            Pomodoro (25 min)
+            25 min
           </button>
           <button onClick={() => startTimer(5)} className="btn btn-secondary" style={{ opacity: 0.8 }}>
-            Short Break (5 min)
+            5 min
           </button>
           <button onClick={() => startTimer(15)} className="btn btn-secondary" style={{ opacity: 0.8 }}>
-            Long Break (15 min)
+            15 min
           </button>
           <button onClick={stopTimer} className="btn btn-secondary" style={{ opacity: 0.8 }}>
             Stop

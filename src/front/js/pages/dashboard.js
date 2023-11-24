@@ -9,10 +9,8 @@ import TaskCard from "../component/TaskCard";
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
   const [gotToken, setGotToken] = useState(store.token)
-  if (!gotToken) {
-    console.log("Redirecting to login.")
-    return <Navigate to="/login" />
-  }
+ 
+  
 
   useEffect(() => {
     actions.fetchCurrentUserComplete();
@@ -20,10 +18,7 @@ const Dashboard = () => {
 
   console.log(store.current_sessions);
 
-  const boxStyle = {
-    maxHeight: "200px", // Set your desired fixed height
-    overflow: "auto", // Enable scrolling if content overflows
-  };
+  
 
   return (
     <div className="wrapper">
@@ -35,19 +30,22 @@ const Dashboard = () => {
         </div>
 
         <TaskCard />
+        
+     
 
-        <div className="text-wrapper ">
+        <div className="text-wrapper weather-box mb-3">
           <div className="container">
             <div className="row">
-              <div className="col-md-6 mb-4">
+              <div className="col-md-6">
                 <PomodoroTimer />
               </div>
-              <div className="col-md-6 mb-4">
+              <div className="col-md-6  ">
                 <WeatherComponent />
               </div>
             </div>
           </div>
         </div>
+        
 
         <div className="row weather-box ">
           <div className="col-md-4">
@@ -62,7 +60,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4" style={boxStyle}>
+          <div className="col-md-4">
             <div className="card">
               <div className="card-body">
                 <h5>Sessions</h5>

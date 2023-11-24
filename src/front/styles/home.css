@@ -1,7 +1,11 @@
 .navbar{ background-color: rgb(218, 226, 236)
   
+  
         
 }
+a{color: #8a8a8a;}
+a:hover{color: white;}
+
 .navbar-brand{
   margin-left: 40px;
   
@@ -9,6 +13,11 @@
 
 .navbar-nav .nav-link .sign :hover  {
   color: #8a8a8a; 
+}
+
+.navbar:hover  {
+  color: #383434;
+  
 }
 
 .titleA{

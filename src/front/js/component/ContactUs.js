@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Context } from '../store/appContext';
+import '../../styles/signup.css'; // Import the CSS file for styling
 
 const ContactUs = () => {
   const { actions } = useContext(Context);
@@ -33,7 +34,7 @@ const ContactUs = () => {
         setSuccessMessage('Thanks for your message! We will get back to you.');
         setErrorMessage('');
       })
-      .catch((error) => {
+      .catch(() => {
         // Display error message
         setErrorMessage('Something went wrong, please check your values');
         setSuccessMessage('');
@@ -44,59 +45,50 @@ const ContactUs = () => {
   };
 
   return (
-    <div id="Contact" className="container border-end-0 border-start-0 mx-auto py-5">
-      <h1>Contact Us</h1>
-      <p>Have any doubts? Share your details, we will get back to you.</p>
-      <div className="form col-8 mx-auto">
-        <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '80%' }} onSubmit={handleFormSubmit}>
-            <div className="form-group row mb-3">
-              <label htmlFor="email" className="col-3 col-form-label text-dark text-end">
-                <strong>Your Email:</strong>
-              </label>
-              <div className="col">
+    <div id="Contact" className="loginBase">
+      <div className="container border-end-0 border-start-0 mx-auto py-5">
+        <h1>Contact Us</h1>
+        <p>Have any doubts? Share your details, we will get back to you.</p>
+        <div className="form-login col-8 mx-auto">
+          <div className="signup-container">
+            <form className="loginBox" onSubmit={handleFormSubmit}>
+              <div className="typeBoxLogin">
+                <label>Your Email:</label>
                 <input
                   type="email"
-                  className="col form-control"
-                  id="email"
+                  className="form-control"
                   placeholder="Your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
-            </div>
-            <div className="form-group row mb-3">
-              <label htmlFor="message" className="col-3 col-form-label text-dark text-end">
-                <strong>Your Message:</strong>
-              </label>
-              <div className="col">
+              <div className="typeBoxLogin">
+                <label>Your Message:</label>
                 <textarea
-                  className="col form-control"
-                  id="message"
+                  className="form-control"
                   placeholder="Write your message here"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
                 ></textarea>
               </div>
-            </div>
-            <div className="form-group row">
-              <div className="col offset-sm-2">
-                <button type="submit" className="btn btn-primary float-end" disabled={isSubmitting}>
+              <div className="btnBox">
+                <button type=" submit" className="btn setbtn" disabled={isSubmitting}>
                   {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
 
       {successMessage && <div className="alert alert-success">{successMessage}</div>}
-      
+
       {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
     </div>
   );
 };
 
 export default ContactUs;
+

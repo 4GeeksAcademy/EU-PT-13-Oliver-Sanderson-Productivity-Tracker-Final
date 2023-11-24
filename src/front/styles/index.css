@@ -7,12 +7,12 @@
     display:flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #E1E7E0;
+    background-color: #ffffff;
     height: 700px;
 }
 
 .loginBox {
-    color: #435334;
+    color: #000000;
     border-radius: 15px;
     padding:30px;
     padding-right: 100px;
@@ -23,29 +23,30 @@
 }
 
 .typeBoxLogin {
-    background-color: #E1E7E0;
-    color: #435334;
+    background-color: #ffffff;
+    color: #000000;
     border: none;
 }
 
 .typeBoxLogin::placeholder {
-    color: #B4BBC1;
+    color: #000000;
 }
 
 .typeBoxLogin:focus {
-    background-color: #E1E7E0;
-    color: #435334;
+    background-color: #ffffff;
+    color: #000000;
     
 }
 
-.loginBtn {
-    background-color: #435334;
+.setbtn {
+    background-color: #6d6b6b;
     color:#FFFFFF;
     margin: 10px;
+    border-radius: 4px;
 }
 
-.loginBtn:hover {
-    background-color: #647554;
+.setbtn:hover {
+    background-color: #383434;
     color:#FFFFFF;
 }
 

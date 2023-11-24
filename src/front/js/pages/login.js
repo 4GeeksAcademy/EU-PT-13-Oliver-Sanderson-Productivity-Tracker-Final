@@ -71,8 +71,8 @@ const Login = () => {
 
   return (
     <div>
-      <nav className="navbar bg-primary" data-bs-theme="dark"></nav>
-        <div className="loginBase">
+  
+        <div className="loginBase weather-box">
           <div className="loginBox">
             <h3>Login</h3>
             <form onSubmit={handleLogin}>
@@ -108,13 +108,13 @@ const Login = () => {
 
               {error && <div className="alert alert-danger">{error}</div>}
               <div className="btnBox">
-              <button type="submit" className="btn loginBtn">
+              <button type="submit" className="btn setbtn">
                 Login
               </button>
             
 
             <Link to="/">
-              <span className="btn loginBtn" href="#" role="button">
+              <span className="btn setbtn" href="#" role="button">
                 Password Recovery
 
               </span>
