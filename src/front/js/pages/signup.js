@@ -37,7 +37,7 @@ const Signup = () => {
 
   return (
     <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <form className="bg-light" style={{ padding: '20px', borderRadius: '1px', width: '60%' }} onSubmit={handleSignup}>
+      <form className="bg-light form-placeholder" style={{ padding: '20px', borderRadius: '1px', width: '60%' }} onSubmit={handleSignup}>
         <h2>Signup Form</h2>
         {showPopup && <Alert messageType="success" message="The use was created :)" />}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
