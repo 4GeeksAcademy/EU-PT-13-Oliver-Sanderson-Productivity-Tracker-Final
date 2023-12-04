@@ -7,45 +7,45 @@
     display:flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #E1E7E0;
+    background-color: #ffffff;
     height: 700px;
 }
 
 .loginBox {
-    color: #435334;
+    color: #000000;
     border-radius: 15px;
     padding:30px;
     padding-right: 100px;
     padding-left: 100px;
     width: 700px;
     background-color: #FFFFFF;
-    filter: drop-shadow(3px 3px 15px #999b98);
+    filter: drop-shadow(3px 3px 15px #d0d0d0);
 }
 
 .typeBoxLogin {
-    background-color: #E1E7E0;
-    color: #435334;
+    background-color: #ffffff;
+    color: #000000;
     border: none;
 }
 
 .typeBoxLogin::placeholder {
-    color: #B4BBC1;
+    color: #d5d5d5;
 }
 
 .typeBoxLogin:focus {
-    background-color: #E1E7E0;
-    color: #435334;
+    background-color: #ededed;
+    color: #7f7f7f;
     
 }
 
 .loginBtn {
-    background-color: #435334;
+    background-color: #000000;
     color:#FFFFFF;
     margin: 10px;
 }
 
 .loginBtn:hover {
-    background-color: #647554;
+    background-color: #343434;
     color:#FFFFFF;
 }
 

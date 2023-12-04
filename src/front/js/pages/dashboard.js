@@ -28,7 +28,7 @@ const Dashboard = () => {
   return (
     <div className="wrapper">
       <div className="container">
-        <div className="col-md-12 justify-content-center">
+        <div className="col-md-12 justify-content-center m-4">
           <h1 className="pt-5 mb-5 display-6 fw-bold">
             Welcome {store.current_user["name"] ? store.current_user["name"] : "User"}, check out your productivity!
           </h1>
@@ -37,7 +37,7 @@ const Dashboard = () => {
         <TaskCard />
 
         <div className="text-wrapper ">
-          <div className="container">
+          <div className="container mt-4">
             <div className="row">
               <div className="col-md-6 mb-4">
                 <PomodoroTimer />
@@ -49,33 +49,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="row weather-box ">
-          <div className="col-md-4">
-            <div className="card">
-              <div className="card-body">
-                <h5>Time Spent</h5>
-                <p>
-                  {store.current_sessions.reduce(function (acc, obj) {
-                    return acc + obj.time_spent;
-                  }, 0) + " Seconds"}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4" style={boxStyle}>
-            <div className="card">
-              <div className="card-body">
-                <h5>Sessions</h5>
-                <hr />
-                {store.current_sessions ? (
-                  <SessionBox sessions={store.current_sessions} />
-                ) : (
-                  <div>No recorded sessions!</div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div >
   );

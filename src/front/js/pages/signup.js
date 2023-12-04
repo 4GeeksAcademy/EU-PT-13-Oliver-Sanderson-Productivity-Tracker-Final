@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
+import { Navigate } from "react-router-dom";
 import '../../styles/signup.css'; // Import the CSS file for styling
 import Alert from '../component/Alert';
 
@@ -13,6 +14,7 @@ const Signup = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [alertMessage, setAlertMessage] = useState("loading...")
   const [alertType, setAlertType] = useState("success")
+  const [redirectLogin, setRedirectLogin] = useState(false)
 
   const { store, actions } = useContext(Context);
 
@@ -22,6 +24,9 @@ const Signup = () => {
       setShowPopup(true);
       setAlertMessage("Sign up successful.")
       setAlertType("success")
+      setTimeout(() => {
+        setRedirectLogin(true);
+      }, "1000");
     } else {
       console.log("NO")
       setShowPopup(true);
@@ -45,6 +50,11 @@ const Signup = () => {
     }
     signinSubmit()
   };
+
+  if (redirectLogin) {
+		console.log("Redirecting to dashboard.")
+		return <Navigate to="/dashboard" />
+	}
 
   return (
     <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
