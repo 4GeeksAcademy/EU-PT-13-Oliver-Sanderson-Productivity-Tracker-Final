@@ -71,9 +71,8 @@ const Login = () => {
 
   return (
     <div>
-      <nav className="navbar bg-primary" data-bs-theme="dark"></nav>
         <div className="loginBase">
-          <div className="loginBox">
+          <div className="loginBox bg-light">
             <h3>Login</h3>
             <form onSubmit={handleLogin}>
               <div className="mb-3">

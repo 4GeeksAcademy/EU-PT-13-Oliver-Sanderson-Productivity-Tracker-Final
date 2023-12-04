@@ -56,9 +56,9 @@ const PomodoroTimer = () => {
   };
 
   return (
-    <div className="card border" >
-      <div className="card-body text-center">
-        <h5 className="card-title">Pomodoro Timer</h5>
+    <div className="h-100 p-5 bg-body-tertiary border rounded-3 custom-container weather-box" >
+      <div className="text-center">
+        <h5 className="box-heading">Pomodoro Timer</h5>
         <p className="card-text display-4">
           {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
         </p>

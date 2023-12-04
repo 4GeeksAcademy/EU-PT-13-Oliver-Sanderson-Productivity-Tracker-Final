@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
-from api.models import db
+from api.models import db, User
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -26,6 +26,12 @@ app.url_map.strict_slashes = False
 # Setup the Flask-JWT-Extended extension
 app.config['JWT_SECRET_KEY'] = 'BaconAndEggs' # TODO Change in final version
 jwt = JWTManager(app)
+
+@jwt.user_lookup_loader
+def user_lookup_callback(_jwt_header, jwt_data):
+    identity = jwt_data["sub"]
+
+    return User.query.filter_by(id=identity["id"]).one_or_none()
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")

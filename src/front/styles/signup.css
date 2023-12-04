@@ -1,16 +1,17 @@
 .signup-container {
-  height: 35px;
+  height: 35vh;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 30px;
-  background-color: #409f40
 }
 
-.form-sign-up {
+.form-placeholder {
   background-color: #f8f9fa;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 1px;
+  width: 80%;
+  margin-top: 300px;
 }
 
 .form-group {
@@ -33,19 +34,18 @@ input[type="password"] {
 
 .signup-button,
 .login-button {
-  background-color: #727274;
+  background-color: #999b9d;
   color: #fff;
   border: none;
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 10px;
-  /* Add a right margin for the gap */
+  margin-right: 10px; /* Add a right margin for the gap */
 }
 
 .signup-button:hover,
 .login-button:hover {
-  background-color: #a5a8ab;
+  background-color: #c5c9cd;
 }
 
 .signup-button:disabled {

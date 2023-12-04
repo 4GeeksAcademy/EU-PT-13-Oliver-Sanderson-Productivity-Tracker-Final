@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Context } from "../store/appContext";
+import { Navigate } from "react-router-dom";
 import '../../styles/signup.css'; // Import the CSS file for styling
+import Alert from '../component/Alert';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +12,32 @@ const Signup = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("loading...")
+  const [alertType, setAlertType] = useState("success")
+  const [redirectLogin, setRedirectLogin] = useState(false)
+
+  const { store, actions } = useContext(Context);
+
+  async function signinSubmit() {
+    if (await actions.fetchSignUp(firstName, lastName, email, password)) {
+      console.log("YES")
+      setShowPopup(true);
+      setAlertMessage("Sign up successful.")
+      setAlertType("success")
+      setTimeout(() => {
+        setRedirectLogin(true);
+      }, "1000");
+    } else {
+      console.log("NO")
+      setShowPopup(true);
+      setAlertMessage("Something is incorrect.")
+      setAlertType("danger")
+    }
+    setEmail('');
+    setFirstName('');
+    setLastName('');
+    setPassword('');
+  }
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -19,34 +48,19 @@ const Signup = () => {
       setSuccessMessage('');
       return;
     }
-
-    // Perform signup logic with the form data
-    // For example, you can send the data to a server or perform validation
-
-    // Reset the form fields
-    setEmail('');
-    setFirstName('');
-    setLastName('');
-    setPassword('');
-
-    setSuccessMessage('Account created successfully.');
-    setErrorMessage('');
-    setShowPopup(true);
+    signinSubmit()
   };
 
-  useEffect(() => {
-    if (showPopup) {
-      setTimeout(() => {
-        setShowPopup(false);
-      }, 2000); // Hide the popup after 2 seconds
-    }
-  }, [showPopup]);
+  if (redirectLogin) {
+		console.log("Redirecting to dashboard.")
+		return <Navigate to="/dashboard" />
+	}
 
   return (
     <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <form className="bg-light form-sign-up" style={{ padding: '20px', borderRadius: '1px', width: '60%' }} onSubmit={handleSignup}>
+      <form className="bg-light form-placeholder" style={{ padding: '20px', borderRadius: '1px', width: '60%' }} onSubmit={handleSignup}>
         <h2>Signup Form</h2>
-        {showPopup && <div className="popup">{successMessage}</div>}
+        {showPopup && <Alert messageType={alertType} message={alertMessage} />}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <div className="form-group">
           <label>Email:</label>
@@ -84,11 +98,11 @@ const Signup = () => {
             required
           />
         </div>
-        
+
         <button type="submit" className="signup-button">Submit</button>
-      
-        <a href="/login" class="login-button">Sign In</a>
-       
+
+        <a href="/login" className="login-button">Sign In</a>
+
       </form>
     </div>
   );

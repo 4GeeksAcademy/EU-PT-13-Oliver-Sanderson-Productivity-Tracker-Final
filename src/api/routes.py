@@ -2,15 +2,14 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Session, Task, Test, StatisticTaskGenerator
+from api.models import db, User, Session, Task, Test, StatisticTaskGenerator, Enquiries
 from api.utils import generate_sitemap, APIException
 import datetime
 from sqlalchemy import delete, update
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
-    get_jwt_identity, 
+    get_jwt_identity, current_user
 )
-
 
 api = Blueprint('api', __name__)
 
@@ -65,7 +64,7 @@ def handle_signup():
             db.session.commit()
 
             response_body = "User created"
-            return jsonify(response_body), 400
+            return jsonify(response_body), 200
 
         else: 
             response_body = "Missing body content"
@@ -315,6 +314,7 @@ def handle_tasks():
         #     "page_name" : "The page",
         #     "page_link" : "URL.com",
         #     "frequency" : "daily",
+        #     "task_time" : 300,
         #     "start_date" : "1000-01-01 00:00:00",
         #     "end_date" : "9999-12-31 23:59:59",
         #     "reward_name" : "Play Game",
@@ -324,11 +324,12 @@ def handle_tasks():
 
         request_body = request.get_json()
         # Check request_body has all required fields
-        if ('user_id' in request_body and 'page_name' in request_body and 'page_link' in request_body and 'start_date' in request_body and 'end_date' in request_body and 'reward_duration' in request_body and 'reward_name' in request_body and 'reward_link' in request_body):
+        if ('user_id' in request_body and 'page_name' in request_body and 'page_link' in request_body and 'task_time' in request_body and 'start_date' in request_body and 'end_date' in request_body and 'reward_duration' in request_body and 'reward_name' in request_body and 'reward_link' in request_body):
             new_task = Task()
             new_task.user_id = request_body["user_id"]
             new_task.page_name = request_body["page_name"]
             new_task.page_link = request_body["page_link"]
+            new_task.task_time = request_body["task_time"]
             new_task.frequency = "Once"
             new_task.start_date = request_body["start_date"]
             new_task.end_date = request_body["end_date"]
@@ -356,6 +357,7 @@ def handle_tasks():
             temp["user_id"] = (result.user_id)
             temp["page_name"] = (result.page_name)
             temp["page_link"] = (result.page_link)
+            temp["task_time"] = (result.task_time)
             # temp["frequency"] = (result.frequency)
             temp["start_date"] = (result.start_date)
             temp["end_date"] = (result.end_date)
@@ -366,9 +368,18 @@ def handle_tasks():
     return jsonify(response_body), 200
 
 
-@api.route('/tasks/:task_id/statistics', methods=['GET'])
-def calculate_task_statistics():
-    statistics =  StatisticTaskGenerator(task_id).calculate_statistic()
+@api.route('/me/tasks', methods=['GET'])
+@jwt_required()
+def get_tasks():
+    print("HELLO HELLO")
+    serialized_tasks = list(map(lambda t: t.serialize(), current_user.tasks))
+    
+    return jsonify(serialized_tasks), 200
+
+@api.route('/tasks/<int:task_id>/statistics', methods=['GET'])
+def calculate_task_statistics(task_id):
+    print(task_id)
+    statistics =  StatisticTaskGenerator(task_id).calculate_statistic(task_id)
     return jsonify(statistics), 200
 
 
@@ -401,3 +412,26 @@ def handle_tests():
 
     return jsonify(response_body), 200
 
+@api.route('/contactus', methods=['POST'])
+def handle_contactus():
+        
+      
+
+        request_body = request.get_json() 
+        # Check request_body has all required fields
+        if ('email' in request_body and 'message' in request_body ):
+            new_enquiries = Enquiries()
+            new_enquiries.email = request_body["email"]
+            new_enquiries.message = request_body["message"]
+            
+            new_enquiries.is_active = True
+
+            db.session.add(new_enquiries)
+            db.session.commit()
+
+            response_body = "Enquiry Submitted"
+            return jsonify(response_body), 400
+
+        else: 
+            response_body = "Missing body content"
+            return jsonify(response_body), 400
