@@ -11,8 +11,28 @@ const Signup = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("loading...")
+  const [alertType, setAlertType] = useState("success")
 
   const { store, actions } = useContext(Context);
+
+  async function signinSubmit() {
+    if (await actions.fetchSignUp(firstName, lastName, email, password)) {
+      console.log("YES")
+      setShowPopup(true);
+      setAlertMessage("Sign up successful.")
+      setAlertType("success")
+    } else {
+      console.log("NO")
+      setShowPopup(true);
+      setAlertMessage("Something is incorrect.")
+      setAlertType("danger")
+    }
+    setEmail('');
+    setFirstName('');
+    setLastName('');
+    setPassword('');
+  }
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -23,23 +43,14 @@ const Signup = () => {
       setSuccessMessage('');
       return;
     }
-
-    if (actions.fetchSignUp(firstName, lastName, email, password)) {
-      setEmail('');
-      setFirstName('');
-      setLastName('');
-      setPassword('');
-      setShowPopup(true);
-    } else {
-      alert('Something went wrong, please check your values')
-    }
+    signinSubmit()
   };
 
   return (
     <div style={{ height: '35vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <form className="bg-light form-placeholder" style={{ padding: '20px', borderRadius: '1px', width: '60%' }} onSubmit={handleSignup}>
         <h2>Signup Form</h2>
-        {showPopup && <Alert messageType="success" message="The use was created :)" />}
+        {showPopup && <Alert messageType={alertType} message={alertMessage} />}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <div className="form-group">
           <label>Email:</label>
