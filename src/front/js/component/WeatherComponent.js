@@ -50,7 +50,7 @@ const WeatherComponent = () => {
           <p>Condition: {weatherData.current.condition.text}</p>
         </div>
       ) : (
-        <p>Loading weather data...</p>
+        <p>Enter a city to view weather.</p>
       )}
     </div>
   );
