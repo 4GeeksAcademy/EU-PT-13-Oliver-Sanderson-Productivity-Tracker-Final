@@ -11,7 +11,7 @@ const TaskCard = () => {
   const [endDate, setEndDate] = useState('');
   const [rewardName, setRewardName] = useState('');
   const [rewardLink, setRewardLink] = useState('');
-  const [rewardDuration, setRewardDuration] = useState('');
+  const [rewardDuration, setRewardDuration] = useState('5 mins');
   const [customRewardDuration, setCustomRewardDuration] = useState('');
   const [error, setError] = useState('');
 
@@ -24,8 +24,7 @@ const TaskCard = () => {
   };
 
   const handleTaskSubmit = (e) => {
-    e.preventDefault();
-
+    e.preventDefault()
 
     if (!isTaskValid()) {
       setError('Please fill in all required fields.');
@@ -52,6 +51,7 @@ const TaskCard = () => {
     // Clear form fields after submission
     setTaskName('');
     setTaskLink('');
+    setTaskTime('');
     setStartDate('');
     setEndDate('');
     setRewardName('');
@@ -82,7 +82,7 @@ const TaskCard = () => {
       {error && <div className="alert alert-danger">{error}</div>}
       <div className="row">
 
-        <div className="col-md-6 ">
+        <div className="col-md-12 ">
           <form onSubmit={handleTaskSubmit}>
             <div className="row align-items-md-stretchx">
 
@@ -228,15 +228,15 @@ const TaskCard = () => {
             </div>
             <button
               type="submit"
-              className=" btn btn-secondary d-flex justify-content"
+              className=" btn btn-secondary d-flex justify-content m-4"
               disabled={!isTaskValid()}
             >
-              Done
+              Submit
             </button>
           </form>
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-12">
           <h5 className="card-title">Task List </h5>
           {tasks.length > 0 && (
             <button className="btn btn-danger mb-3" onClick={handleDeleteAllTasks}>
@@ -259,7 +259,7 @@ const TaskCard = () => {
               {store.current_tasks.map((task, index) => (
                 <tr key={task.id}>
                   <td>{task.page_name}</td>
-                  <td>{task.reward_name}</td>
+                  <td style={store.current_tasks[index].statistics.completed ? { color:'green', fontWeight:'bold'} : {color : 'black'}}>{task.reward_name}</td>
                   <td>{(task.start_date).slice(0, 16)}</td>
                   <td>{(task.end_date).slice(0, 16)}</td>
                   <td style={store.current_tasks[index].statistics.completed ? { color:'green'} : {color : 'red'}}>{store.current_tasks[index].statistics.completed ? "Completed": "Incomplete"}</td>
